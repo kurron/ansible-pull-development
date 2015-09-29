@@ -224,3 +224,12 @@
         file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
       - name: Copy desktop logFACES file  
         copy: src=files/logFACES.desktop dest=/home/vagrant/Desktop/logFACES.desktop owner=vagrant group=vagrant backup=no mode=755
+
+- name: MySQL Tools
+  hosts: Ubuntu
+  sudo: True
+  tasks:
+      - name: Install MySQL client
+        apt: name=mysql-client state=latest
+      - name: Install MySQL Workbench
+        apt: name=mysql-workbench state=latest
