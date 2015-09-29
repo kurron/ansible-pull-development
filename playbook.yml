@@ -49,3 +49,20 @@
       copy: src=files/gvm.config dest=/home/vagrant/.gvm/etc/config owner=vagrant group=vagrant mode=644 backup=no
     - name: Set permissions on the home directory
       file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
+
+- name: Apache Ant bits
+  hosts: Ubuntu
+  sudo: False
+  tasks:
+      - name: Create Software directory
+        file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
+      - name: Create Downloads directory
+        file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
+      - name: Download Ant
+        get_url: url=http://mirrors.ibiblio.org/apache//ant/binaries/apache-ant-1.9.5-bin.tar.gz dest=/home/vagrant/Downloads/ant.tar.gz mode=444
+      - name: Unpack Ant
+        unarchive: src=/home/vagrant/Downloads/ant.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/apache-ant-1.9.5/README
+      - name: Soft-link Ant
+        file: src=/home/vagrant/Software/apache-ant-1.9.5 path=/home/vagrant/Software/ant state=link
+      - name: Export ANT_HOME
+        lineinfile: dest=/etc/environment line='ANT_HOME=/home/vagrant/Software/ant'
