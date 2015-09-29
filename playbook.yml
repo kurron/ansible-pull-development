@@ -172,6 +172,27 @@
       - name: Export WEBIDE_JDK
         lineinfile: dest=/etc/environment line='WEBIDE_JDK=/usr/lib/jvm/oracle-jdk-8'
 
+- name: Jetbrain's RubyMine IDE
+  hosts: Ubuntu
+  sudo: False
+  tasks:
+      - name: Create Software directory
+        file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
+      - name: Create Downloads directory
+        file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
+      - name: Download RubyMine
+        get_url: url=http://download.jetbrains.com/ruby/RubyMine-7.1.4.tar.gz dest=/home/vagrant/Downloads/rubymine.tar.gz mode=444
+      - name: Unpack RubyMine
+        unarchive: src=/home/vagrant/Downloads/rubymine.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/RubyMine-7.1.4/build.txt
+      - name: Soft-link RubyMine
+        file: src=/home/vagrant/Software/RubyMine-7.1.4 path=/home/vagrant/Software/rubymine state=link
+      - name: Create Desktop directory
+        file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
+      - name: Copy desktop RubyMine file
+        copy: src=files/RubyMine.desktop dest=/home/vagrant/Desktop/RubyMine.desktop owner=vagrant group=vagrant backup=no mode=755
+      - name: Export RUBYMINE_JDK
+        lineinfile: dest=/etc/environment line='RUBYMINE_JDK=/usr/lib/jvm/oracle-jdk-8'
+
 - name: Charles proxy bits 
   hosts: Ubuntu
   sudo: False
