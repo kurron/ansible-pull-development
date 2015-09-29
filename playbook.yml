@@ -83,3 +83,28 @@
         file: src=/home/vagrant/Software/apache-maven-3.3.1 path=/home/vagrant/Software/maven state=link
       - name: Export M2_HOME
         lineinfile: dest=/etc/environment line='M2_HOME=/home/vagrant/Software/maven'
+
+- name: Node
+  hosts: Ubuntu
+  sudo: True
+  tasks:
+      - name: Download Node
+        get_url: url=http://nodejs.org/dist/v0.12.0/node-v0.12.0-linux-x64.tar.gz dest=/root/node.tar.gz mode=444
+      - name: Unpack Node
+        unarchive: src=/root/node.tar.gz dest=/opt copy=no owner=root group=root creates=/opt/node-v0.12.0-linux-x64/LICENSE
+      - name: Soft-link Node
+        file: src=/opt/node-v0.12.0-linux-x64/bin/node path=/usr/local/bin/node state=link
+      - name: Soft-link NPM
+        file: src=/opt/node-v0.12.0-linux-x64/bin/npm path=/usr/local/bin/npm state=link
+      - name: Set permissions on the opt directory
+        file: path=/opt owner=root group=root recurse=true state=directory
+      - name: Update npm
+        command: /usr/local/bin/npm install -g npm@"2.7.1"
+      - name: Install Yeoman 
+        npm: name=yo global=yes
+      - name: Install Bower 
+        npm: name=bower global=yes
+      - name: Install Grunt 
+        npm: name=grunt-cli global=yes
+      - name: Install JHipster 
+        npm: name=generator-jhipster global=yes
