@@ -7,34 +7,30 @@
     - name: create groups based on distribution
       group_by: key={{ ansible_distribution }}
 
-- name: Install Docker
+- name: Install Version Control Systems
   hosts: Ubuntu
   sudo: True
   tasks:
-    - name: Install cURL
-      apt: name=curl state=latest update_cache=true cache_valid_time=600
-    - name: Download Docker Installation Script
-      command: /usr/bin/curl --location --output /root/install-docker https://get.docker.com/
-    - name: Set Permission Bits On The Docker Installation Script
-      file: path=/root/install-docker owner=root group=root mode=0500
-    - name: Execute Docker Installation Script
-      shell: /root/install-docker
-    - name: Set Memory and Swap Accounting
-      lineinfile: dest=/etc/default/grub regexp='^GRUB_CMDLINE_LINUX=""' line='GRUB_CMDLINE_LINUX="cgroup_enable=memory swapaccount=1"'
-    - name: Expose the daemon over insecure HTTP
-      lineinfile: dest=/etc/default/docker line='DOCKER_OPTS="-H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock"'
-    - name: Add account to the docker group
-#     user: name=vagrant groups=docker
-      command: usermod -aG docker vagrant
-    - name: Restart Docker
-      command: service docker restart
-    - name: Test Docker
-      command: docker run hello-world
-    - name: Download Docker Compose Script
-      shell: /usr/bin/curl --location --output /usr/local/bin/docker-compose https://github.com/docker/compose/releases/download/1.4.1/docker-compose-`uname -s`-`uname -m`
-    - name: Set Permission Bits On The Docker Compose Script
-      file: path=/usr/local/bin/docker-compose owner=root group=root mode=0555
-    - name: Echo Docker Compose version
-      command: docker-compose --version
-    - name: Rebuild GRUB
-      command: update-grub
+    - name: Install Git
+      apt: name=git state=latest update_cache=true cache_valid_time=600
+    - name: Install Subversion
+      apt: name=subversion state=latest update_cache=true cache_valid_time=600
+    - name: Install Mercurial
+      apt: name=mercurial state=latest update_cache=true cache_valid_time=600
+
+- name: Install JDK
+  hosts: Ubuntu
+  sudo: True
+  tasks:
+    - name: Download Java 8 JDK
+      command: wget --quiet --output-document=/root/jdk-8.tar.gz --no-check-certificate --no-cookies --header "Cookie:oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u60-b27/jdk-8u60-linux-x64.tar.gz
+    - name: Create destination directory
+      file: path=/usr/lib/jvm owner=root group=root state=directory mode=755
+    - name: unpack the archive
+      unarchive: src=/root/jdk-8.tar.gz dest=/usr/lib/jvm copy=no owner=root group=root mode=755 creates=/usr/lib/jvm/jdk1.8.0_60/COPYRIGHT
+    - name: soft-link the JDK to a normalized location
+      file: src=/usr/lib/jvm/jdk1.8.0_60 dest=/usr/lib/jvm/oracle-jdk-8 owner=root group=root state=link 
+    - name: Export JDK_HOME
+      lineinfile: dest=/etc/environment line='JDK_HOME=/usr/lib/jvm/oracle-jdk-8'
+    - name: Export JAVA_HOME
+      lineinfile: dest=/etc/environment line='JAVA_HOME=/usr/lib/jvm/oracle-jdk-8'
