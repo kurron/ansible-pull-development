@@ -188,3 +188,20 @@
         file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
       - name: Copy desktop Charles file  
         copy: src=files/Charles.desktop dest=/home/vagrant/Desktop/Charles.desktop owner=vagrant group=vagrant backup=no mode=755
+
+- name: DbVisualizer Database Browser 
+  hosts: Ubuntu
+  sudo: False
+  tasks:
+      - name: Create Software directory 
+        file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
+      - name: Create Downloads directory
+        file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
+      - name: Download DbVisualizer 
+        get_url: url=https://www.dbvis.com/product_download/dbvis-9.2.5/media/dbvis_unix_9_2_5.tar.gz dest=/home/vagrant/Downloads/dbvis.tar.gz mode=444 
+      - name: Unpack DbVisualizer 
+        unarchive: src=/home/vagrant/Downloads/dbvis.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/DbVisualizer
+      - name: Create Desktop directory 
+        file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
+      - name: Copy desktop DbVisualizer file  
+        copy: src=files/Database.desktop dest=/home/vagrant/Desktop/Database.desktop owner=vagrant group=vagrant backup=no mode=755
