@@ -150,3 +150,24 @@
         copy: src=files/PyCharm.desktop dest=/home/vagrant/Desktop/PyCharm.desktop owner=vagrant group=vagrant backup=no mode=755
       - name: Export PYCHARM_JDK
         lineinfile: dest=/etc/environment line='PYCHARM_JDK=/usr/lib/jvm/oracle-jdk-8'
+
+- name: Jetbrain's WebStorm IDE
+  hosts: Ubuntu
+  sudo: False
+  tasks:
+      - name: Create Software directory
+        file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
+      - name: Create Downloads directory
+        file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
+      - name: Download WebStorm
+        get_url: url=http://download.jetbrains.com/webstorm/WebStorm-10.0.4.tar.gz dest=/home/vagrant/Downloads/webstorm.tar.gz mode=444
+      - name: Unpack WebStorm
+        unarchive: src=/home/vagrant/Downloads/webstorm.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/WebStorm-141.1550/build.txt
+      - name: Soft-link WebStorm
+        file: src=/home/vagrant/Software/WebStorm-141.1550 path=/home/vagrant/Software/webstorm state=link
+      - name: Create Desktop directory
+        file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
+      - name: Copy desktop WebStorm file
+        copy: src=files/WebStorm.desktop dest=/home/vagrant/Desktop/WebStorm.desktop owner=vagrant group=vagrant backup=no mode=755
+      - name: Export WEBIDE_JDK
+        lineinfile: dest=/etc/environment line='WEBIDE_JDK=/usr/lib/jvm/oracle-jdk-8'
