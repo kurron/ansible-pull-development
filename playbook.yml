@@ -129,3 +129,24 @@
         copy: src=files/InjelliJ.desktop dest=/home/vagrant/Desktop/InjelliJ.desktop owner=vagrant group=vagrant backup=no mode=755
       - name: Export IDEA_JDK
         lineinfile: dest=/etc/environment line='IDEA_JDK=/usr/lib/jvm/oracle-jdk-8'
+
+- name: Jetbrain's PyCharm IDE
+  hosts: Ubuntu
+  sudo: False
+  tasks:
+      - name: Create Software directory
+        file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
+      - name: Create Downloads directory
+        file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
+      - name: Download PyCharm
+        get_url: url=http://download.jetbrains.com/python/pycharm-professional-4.5.1.tar.gz dest=/home/vagrant/Downloads/pycharm.tar.gz mode=444
+      - name: Unpack PyCharm
+        unarchive: src=/home/vagrant/Downloads/pycharm.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/pycharm-4.5.1/build.txt
+      - name: Soft-link PyCharm
+        file: src=/home/vagrant/Software/pycharm-4.5.1 path=/home/vagrant/Software/pycharm state=link
+      - name: Create Desktop directory
+        file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
+      - name: Copy desktop PyCharm file
+        copy: src=files/PyCharm.desktop dest=/home/vagrant/Desktop/PyCharm.desktop owner=vagrant group=vagrant backup=no mode=755
+      - name: Export PYCHARM_JDK
+        lineinfile: dest=/etc/environment line='PYCHARM_JDK=/usr/lib/jvm/oracle-jdk-8'
