@@ -205,3 +205,22 @@
         file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
       - name: Copy desktop DbVisualizer file  
         copy: src=files/Database.desktop dest=/home/vagrant/Desktop/Database.desktop owner=vagrant group=vagrant backup=no mode=755
+
+- name: logFACES Client 
+  hosts: Ubuntu
+  sudo: False
+  tasks:
+      - name: Create Software directory 
+        file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
+      - name: Create Downloads directory
+        file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
+      - name: Download logFACES 
+        get_url: url=http://www.moonlit-software.com/logfaces/downloads/lfc.4.2.0.linux.gtk.x86_64.tar.gz dest=/home/vagrant/Downloads/logfaces.tar.gz mode=444 
+      - name: Unpack logFACES 
+        unarchive: src=/home/vagrant/Downloads/logfaces.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/logFacesClient/about.html
+      - name: soft-link the JDK to a normalized location
+        file: src=/usr/lib/jvm/oracle-jdk-8/jre dest=/home/vagrant/Software/logFacesClient/jre owner=root group=root state=link
+      - name: Create Desktop directory 
+        file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
+      - name: Copy desktop logFACES file  
+        copy: src=files/logFACES.desktop dest=/home/vagrant/Desktop/logFACES.desktop owner=vagrant group=vagrant backup=no mode=755
