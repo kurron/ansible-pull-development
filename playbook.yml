@@ -76,11 +76,11 @@
       - name: Create Downloads directory
         file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
       - name: Download Maven
-        get_url: url=http://mirrors.ibiblio.org/apache/maven/maven-3/3.3.1/binaries/apache-maven-3.3.1-bin.tar.gz dest=/home/vagrant/Downloads/maven.tar.gz mode=444
+        get_url: url=http://mirrors.ibiblio.org/apache/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.tar.gz dest=/home/vagrant/Downloads/maven.tar.gz mode=444
       - name: Unpack Maven
-        unarchive: src=/home/vagrant/Downloads/maven.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/apache-maven-3.3.1/NOTICE
+        unarchive: src=/home/vagrant/Downloads/maven.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/apache-maven-3.3.3/NOTICE
       - name: Soft-link Maven
-        file: src=/home/vagrant/Software/apache-maven-3.3.1 path=/home/vagrant/Software/maven state=link
+        file: src=/home/vagrant/Software/apache-maven-3.3.3 path=/home/vagrant/Software/maven state=link
       - name: Export M2_HOME
         lineinfile: dest=/etc/environment line='M2_HOME=/home/vagrant/Software/maven'
 
@@ -89,13 +89,13 @@
   sudo: True
   tasks:
       - name: Download Node
-        get_url: url=http://nodejs.org/dist/v0.12.0/node-v0.12.0-linux-x64.tar.gz dest=/root/node.tar.gz mode=444
+        get_url: url=http://nodejs.org/dist/v0.12.7/node-v0.12.7-linux-x64.tar.gz dest=/root/node.tar.gz mode=444
       - name: Unpack Node
-        unarchive: src=/root/node.tar.gz dest=/opt copy=no owner=root group=root creates=/opt/node-v0.12.0-linux-x64/LICENSE
+        unarchive: src=/root/node.tar.gz dest=/opt copy=no owner=root group=root creates=/opt/node-v0.12.7-linux-x64/LICENSE
       - name: Soft-link Node
-        file: src=/opt/node-v0.12.0-linux-x64/bin/node path=/usr/local/bin/node state=link
+        file: src=/opt/node-v0.12.7-linux-x64/bin/node path=/usr/local/bin/node state=link
       - name: Soft-link NPM
-        file: src=/opt/node-v0.12.0-linux-x64/bin/npm path=/usr/local/bin/npm state=link
+        file: src=/opt/node-v0.12.7-linux-x64/bin/npm path=/usr/local/bin/npm state=link
       - name: Set permissions on the opt directory
         file: path=/opt owner=root group=root recurse=true state=directory
       - name: Update npm
@@ -139,11 +139,11 @@
       - name: Create Downloads directory
         file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
       - name: Download PyCharm
-        get_url: url=http://download.jetbrains.com/python/pycharm-professional-4.5.1.tar.gz dest=/home/vagrant/Downloads/pycharm.tar.gz mode=444
+        get_url: url=http://download.jetbrains.com/python/pycharm-professional-4.5.4.tar.gz dest=/home/vagrant/Downloads/pycharm.tar.gz mode=444
       - name: Unpack PyCharm
-        unarchive: src=/home/vagrant/Downloads/pycharm.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/pycharm-4.5.1/build.txt
+        unarchive: src=/home/vagrant/Downloads/pycharm.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/pycharm-4.5.4/build.txt
       - name: Soft-link PyCharm
-        file: src=/home/vagrant/Software/pycharm-4.5.1 path=/home/vagrant/Software/pycharm state=link
+        file: src=/home/vagrant/Software/pycharm-4.5.4 path=/home/vagrant/Software/pycharm state=link
       - name: Create Desktop directory
         file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
       - name: Copy desktop PyCharm file
@@ -181,7 +181,7 @@
       - name: Create Downloads directory
         file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
       - name: Download Charles 
-        get_url: url=http://www.charlesproxy.com/assets/release/3.10/charles-proxy-3.10.tar.gz dest=/home/vagrant/Downloads/charles.tar.gz mode=444 
+        get_url: url=http://www.charlesproxy.com/assets/release/3.10.2/charles-proxy-3.10.2.tar.gz dest=/home/vagrant/Downloads/charles.tar.gz mode=444 
       - name: Unpack Charles 
         unarchive: src=/home/vagrant/Downloads/charles.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/charles/icon/charles_icon16.png
       - name: Create Desktop directory 
@@ -198,7 +198,7 @@
       - name: Create Downloads directory
         file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
       - name: Download DbVisualizer 
-        get_url: url=https://www.dbvis.com/product_download/dbvis-9.2.5/media/dbvis_unix_9_2_5.tar.gz dest=/home/vagrant/Downloads/dbvis.tar.gz mode=444 
+        get_url: url=https://www.dbvis.com/product_download/dbvis-9.2.10/media/dbvis_unix_9_2_10.tar.gz dest=/home/vagrant/Downloads/dbvis.tar.gz mode=444 
       - name: Unpack DbVisualizer 
         unarchive: src=/home/vagrant/Downloads/dbvis.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/DbVisualizer
       - name: Create Desktop directory 
@@ -215,7 +215,7 @@
       - name: Create Downloads directory
         file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
       - name: Download logFACES 
-        get_url: url=http://www.moonlit-software.com/logfaces/downloads/lfc.4.2.0.linux.gtk.x86_64.tar.gz dest=/home/vagrant/Downloads/logfaces.tar.gz mode=444 
+        get_url: url=http://www.moonlit-software.com/logfaces/downloads/lfc.4.2.1.linux.gtk.x86_64.tar.gz dest=/home/vagrant/Downloads/logfaces.tar.gz mode=444 
       - name: Unpack logFACES 
         unarchive: src=/home/vagrant/Downloads/logfaces.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/logFacesClient/about.html
       - name: soft-link the JDK to a normalized location
@@ -256,8 +256,8 @@
       - name: Download FFmpeg
         get_url: url=http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz dest=/root/ffmpeg.tar.xz mode=444
       - name: Unpack FFmpeg
-        unarchive: src=/root/ffmpeg.tar.xz dest=/opt copy=no owner=root group=root creates=/opt/ffmpeg-2.7.2-64bit-static/ffprobe
+        unarchive: src=/root/ffmpeg.tar.xz dest=/opt copy=no owner=root group=root creates=/opt/ffmpeg-2.8-64bit-static/ffprobe
       - name: Soft-link FFmpeg
-        file: src=/opt/ffmpeg-2.7.2-64bit-static path=/opt/ffmpeg state=link
+        file: src=/opt/ffmpeg-2.8-64bit-static path=/opt/ffmpeg state=link
       - name: Set permissions on the opt directory
         file: path=/opt owner=root group=root recurse=true state=directory
