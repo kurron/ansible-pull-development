@@ -47,7 +47,9 @@
     - debug: msg="ansible_env.LOGNAME = {{ ansible_env.LOGNAME }}"
     - debug: msg="ansible_env.HOME = {{ ansible_env.HOME }}"
     - name: Download GVM
-      get_url: url=http://get.gvmtool.net dest=/root/install-gvm.sh mode=755
+      get_url: url=http://get.gvmtool.net dest=/root/install-gvm.sh mode=0755
+    - name: Set permissions on the file 
+      file: path=/root/install-gvm.sh owner=vagrant group=vagrant mode=0755 state=file
     - name: Install GVM
       shell: sudo --user vagrant --set-home --non-interactive --login /root/install-gvm.sh --
     - name: Create destination director
