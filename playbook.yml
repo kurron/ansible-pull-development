@@ -1,0 +1,40 @@
+#!/usr/bin/env ansible-playbook
+
+- name: Gather prerequisites 
+  hosts: all
+  gather_facts: True
+  tasks:
+    - name: create groups based on distribution
+      group_by: key={{ ansible_distribution }}
+
+- name: Install Docker
+  hosts: Ubuntu
+  sudo: True
+  tasks:
+    - name: Install cURL
+      apt: name=curl state=latest update_cache=true cache_valid_time=600
+    - name: Download Docker Installation Script
+      command: /usr/bin/curl --location --output /root/install-docker https://get.docker.com/
+    - name: Set Permission Bits On The Docker Installation Script
+      file: path=/root/install-docker owner=root group=root mode=0500
+    - name: Execute Docker Installation Script
+      shell: /root/install-docker
+    - name: Set Memory and Swap Accounting
+      lineinfile: dest=/etc/default/grub regexp='^GRUB_CMDLINE_LINUX=""' line='GRUB_CMDLINE_LINUX="cgroup_enable=memory swapaccount=1"'
+    - name: Expose the daemon over insecure HTTP
+      lineinfile: dest=/etc/default/docker line='DOCKER_OPTS="-H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock"'
+    - name: Add account to the docker group
+#     user: name=vagrant groups=docker
+      command: usermod -aG docker vagrant
+    - name: Restart Docker
+      command: service docker restart
+    - name: Test Docker
+      command: docker run hello-world
+    - name: Download Docker Compose Script
+      shell: /usr/bin/curl --location --output /usr/local/bin/docker-compose https://github.com/docker/compose/releases/download/1.4.1/docker-compose-`uname -s`-`uname -m`
+    - name: Set Permission Bits On The Docker Compose Script
+      file: path=/usr/local/bin/docker-compose owner=root group=root mode=0555
+    - name: Echo Docker Compose version
+      command: docker-compose --version
+    - name: Rebuild GRUB
+      command: update-grub
