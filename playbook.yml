@@ -108,3 +108,24 @@
         npm: name=grunt-cli global=yes
       - name: Install JHipster 
         npm: name=generator-jhipster global=yes
+
+- name: Jetbrains IntelliJ IDEA
+  hosts: Ubuntu
+  sudo: False
+  tasks:
+      - name: Create Software directory
+        file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
+      - name: Create Downloads directory
+        file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
+      - name: Download IntelliJ IDEA
+        get_url: url=http://download.jetbrains.com/idea/ideaIU-14.1.5.tar.gz dest=/home/vagrant/Downloads/idea.tar.gz mode=444
+      - name: Unpack IntelliJ IDEA
+        unarchive: src=/home/vagrant/Downloads/idea.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/idea-IU-141.2735.5/build.txt
+      - name: Soft-link IntelliJ
+        file: src=/home/vagrant/Software/idea-IU-141.2735.5 path=/home/vagrant/Software/idea state=link
+      - name: Create Desktop directory
+        file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
+      - name: Copy desktop IntelliJ file
+        copy: src=files/InjelliJ.desktop dest=/home/vagrant/Desktop/InjelliJ.desktop owner=vagrant group=vagrant backup=no mode=755
+      - name: Export IDEA_JDK
+        lineinfile: dest=/etc/environment line='IDEA_JDK=/usr/lib/jvm/oracle-jdk-8'
