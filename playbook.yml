@@ -66,3 +66,20 @@
         file: src=/home/vagrant/Software/apache-ant-1.9.5 path=/home/vagrant/Software/ant state=link
       - name: Export ANT_HOME
         lineinfile: dest=/etc/environment line='ANT_HOME=/home/vagrant/Software/ant'
+
+- name: Apache Maven bits
+  hosts: Ubuntu
+  sudo: False
+  tasks:
+      - name: Create Software directory
+        file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
+      - name: Create Downloads directory
+        file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
+      - name: Download Maven
+        get_url: url=http://mirrors.ibiblio.org/apache/maven/maven-3/3.3.1/binaries/apache-maven-3.3.1-bin.tar.gz dest=/home/vagrant/Downloads/maven.tar.gz mode=444
+      - name: Unpack Maven
+        unarchive: src=/home/vagrant/Downloads/maven.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/apache-maven-3.3.1/NOTICE
+      - name: Soft-link Maven
+        file: src=/home/vagrant/Software/apache-maven-3.3.1 path=/home/vagrant/Software/maven state=link
+      - name: Export M2_HOME
+        lineinfile: dest=/etc/environment line='M2_HOME=/home/vagrant/Software/maven'
