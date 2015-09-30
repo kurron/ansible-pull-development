@@ -36,7 +36,7 @@
       lineinfile: dest=/etc/environment line='JAVA_HOME=/usr/lib/jvm/oracle-jdk-8'
 
 - name: Install The Software Development Kit Manager
-  hosts: nobody
+  hosts: Ubuntu
   sudo: True
   tasks:
     - debug: msg="ansible_env.SUDO_USER = {{ ansible_env.SUDO_USER }}"
@@ -47,12 +47,10 @@
     - debug: msg="ansible_env.LOGNAME = {{ ansible_env.LOGNAME }}"
     - debug: msg="ansible_env.HOME = {{ ansible_env.HOME }}"
     - debug: msg="ansible_user_id = {{ ansible_user_id }}"
-    - name: Download GVM
-      get_url: url=http://get.sdkman.io dest=/root/install-gvm.sh mode=0777
-#   - name: Set permissions on the file 
-#     file: path=/root/install-gvm.sh owner=vagrant group=vagrant mode=0755 state=file
+    - name: Copy GVM installation script to a safe place
+      copy: src=scripts/install-gvm.sh dest=/tmp/install-gvm.sh owner=vagrant group=vagrant mode=755 backup=no
     - name: Install GVM
-      shell: sudo --user vagrant --set-home --non-interactive --login /root/install-gvm.sh --
+      shell: sudo --user vagrant --set-home --non-interactive --login /tmp/install-gvm.sh --
     - name: Create destination director
       file: path=/home/vagrant/.gvm/etc owner=vagrant group=vagrant state=directory mode=755
     - name: Copy GVM configuration file
