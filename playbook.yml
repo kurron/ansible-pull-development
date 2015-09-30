@@ -18,6 +18,13 @@
     - name: Install Mercurial
       apt: name=mercurial state=latest update_cache=true cache_valid_time=600
 
+- name: Install Utilities
+  hosts: Ubuntu
+  sudo: True
+  tasks:
+    - name: Install sshpass for some of the Docker scripting
+      apt: name=sshpass state=latest update_cache=true cache_valid_time=600
+
 - name: Install JDK
   hosts: Ubuntu
   sudo: True
