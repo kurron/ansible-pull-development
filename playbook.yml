@@ -49,6 +49,8 @@
     - debug: msg="ansible_env.LOGNAME = {{ ansible_env.LOGNAME }}"
     - debug: msg="ansible_env.HOME = {{ ansible_env.HOME }}"
     - debug: msg="ansible_user_id = {{ ansible_user_id }}"
+    - name: Install cURL
+      apt: name=curl state=latest
     - name: Copy GVM installation script to a safe place
       copy: src=scripts/install-gvm.sh dest=/tmp/install-gvm.sh owner=vagrant group=vagrant mode=755 backup=no
     - name: Install GVM
