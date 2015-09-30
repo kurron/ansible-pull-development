@@ -34,6 +34,8 @@
       lineinfile: dest=/etc/environment line='JDK_HOME=/usr/lib/jvm/oracle-jdk-8'
     - name: Export JAVA_HOME
       lineinfile: dest=/etc/environment line='JAVA_HOME=/usr/lib/jvm/oracle-jdk-8'
+    - name: Export JAVA_CMD
+      lineinfile: dest=/etc/environment line='JAVA_CMD=/usr/lib/jvm/oracle-jdk-8/bin/java'
 
 - name: Install The Software Development Kit Manager
   hosts: Ubuntu
