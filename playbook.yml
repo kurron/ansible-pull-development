@@ -119,7 +119,7 @@
       - name: Set permissions on the opt directory
         file: path=/opt owner=root group=root recurse=true state=directory
       - name: Update npm
-        command: /usr/local/bin/npm install -g npm@"2.7.1"
+        command: /usr/local/bin/npm install -g npm@latest
       - name: Install Yeoman 
         npm: name=yo global=yes
       - name: Install Bower 
