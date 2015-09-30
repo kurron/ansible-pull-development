@@ -58,6 +58,17 @@
     - name: Set permissions on the home directory
       file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
+- name: Install Clojure
+  hosts: Ubuntu
+  sudo: False
+  tasks:
+      - name: Create bin directory
+        file: path=/home/vagrant/bin owner=vagrant group=vagrant state=directory mode=755
+      - name: Install Leiningen
+        get_url: url=https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein dest=/home/vagrant/bin/lein mode=0744
+      - name: Set permissions on the home directory
+        file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
+
 - name: Apache Ant bits
   hosts: Ubuntu
   sudo: False
