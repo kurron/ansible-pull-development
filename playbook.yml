@@ -329,3 +329,10 @@
         file: src=/opt/ffmpeg-2.8-64bit-static path=/opt/ffmpeg state=link
       - name: Set permissions on the opt directory
         file: path=/opt owner=root group=root recurse=true state=directory
+
+- name: Install HTTP IE (cURL replacement)
+  hosts: Ubuntu
+  sudo: True
+  tasks:
+      - pip: name=setuptools
+      - pip: name=httpie
