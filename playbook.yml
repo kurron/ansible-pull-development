@@ -36,7 +36,7 @@
       lineinfile: dest=/etc/environment line='JAVA_HOME=/usr/lib/jvm/oracle-jdk-8'
 
 - name: Install GVM
-  hosts: Ubuntu
+  hosts: nobody
   sudo: True
   tasks:
     - debug: msg="ansible_env.SUDO_USER = {{ ansible_env.SUDO_USER }}"
@@ -46,6 +46,7 @@
     - debug: msg="ansible_env.USERNAME = {{ ansible_env.USERNAME }}"
     - debug: msg="ansible_env.LOGNAME = {{ ansible_env.LOGNAME }}"
     - debug: msg="ansible_env.HOME = {{ ansible_env.HOME }}"
+    - debug: msg="ansible_user_id = {{ ansible_user_id }}"
     - name: Download GVM
       get_url: url=http://get.gvmtool.net dest=/root/install-gvm.sh mode=0777
 #   - name: Set permissions on the file 
@@ -63,6 +64,14 @@
   hosts: Ubuntu
   sudo: False
   tasks:
+    - debug: msg="ansible_env.SUDO_USER = {{ ansible_env.SUDO_USER }}"
+    - debug: msg="ansible_env.SUDO_UID = {{ ansible_env.SUDO_UID }}"
+    - debug: msg="ansible_env.SUDO_GID = {{ ansible_env.SUDO_GID }}"
+    - debug: msg="ansible_env.USER = {{ ansible_env.USER }}"
+    - debug: msg="ansible_env.USERNAME = {{ ansible_env.USERNAME }}"
+    - debug: msg="ansible_env.LOGNAME = {{ ansible_env.LOGNAME }}"
+    - debug: msg="ansible_env.HOME = {{ ansible_env.HOME }}"
+    - debug: msg="ansible_user_id = {{ ansible_user_id }}"
       - name: Create Software directory
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
       - name: Create Downloads directory
