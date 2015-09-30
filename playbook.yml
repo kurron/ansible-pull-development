@@ -338,3 +338,13 @@
   tasks:
       - pip: name=setuptools
       - pip: name=httpie
+
+- name: Add host names for Dockered services
+  hosts: Ubuntu
+  sudo: True
+  tasks:
+      - lineinfile: dest=/etc/hosts line='127.0.0.1 mongodb'
+      - lineinfile: dest=/etc/hosts line='127.0.0.1 redis'
+      - lineinfile: dest=/etc/hosts line='127.0.0.1 mysql'
+      - lineinfile: dest=/etc/hosts line='127.0.0.1 postgresql'
+      - lineinfile: dest=/etc/hosts line='127.0.0.1 rabbitmq'
