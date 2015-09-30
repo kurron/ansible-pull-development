@@ -24,6 +24,8 @@
   tasks:
     - name: Install sshpass for some of the Docker scripting
       apt: name=sshpass state=latest update_cache=true cache_valid_time=600
+    - name: I am not sure why Firefox isn't installed so I'm doing it now
+      apt: name=firefox state=latest update_cache=true cache_valid_time=600
 
 - name: Install JDK
   hosts: Ubuntu
