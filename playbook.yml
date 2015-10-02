@@ -352,6 +352,7 @@
   hosts: Ubuntu
   sudo: True
   tasks:
+      - lineinfile: dest=/etc/hosts line='127.0.0.1 mongo'
       - lineinfile: dest=/etc/hosts line='127.0.0.1 mongodb'
       - lineinfile: dest=/etc/hosts line='127.0.0.1 redis'
       - lineinfile: dest=/etc/hosts line='127.0.0.1 mysql'
