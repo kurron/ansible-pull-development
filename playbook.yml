@@ -32,13 +32,13 @@
   sudo: True
   tasks:
     - name: Download Java 8 JDK
-      command: wget --quiet --output-document=/root/jdk-8.tar.gz --no-check-certificate --no-cookies --header "Cookie:oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u60-b27/jdk-8u60-linux-x64.tar.gz
+      command: wget --quiet --output-document=/root/jdk-8.tar.gz --no-check-certificate --no-cookies --header "Cookie:oraclelicense=accept-securebackup-cookie"http://download.oracle.com/otn-pub/java/jdk/8u65-b17/jdk-8u65-linux-x64.tar.gz 
     - name: Create destination directory
       file: path=/usr/lib/jvm owner=root group=root state=directory mode=755
     - name: unpack the archive
-      unarchive: src=/root/jdk-8.tar.gz dest=/usr/lib/jvm copy=no owner=root group=root mode=755 creates=/usr/lib/jvm/jdk1.8.0_60/COPYRIGHT
+      unarchive: src=/root/jdk-8.tar.gz dest=/usr/lib/jvm copy=no owner=root group=root mode=755 creates=/usr/lib/jvm/jdk1.8.0_65/COPYRIGHT
     - name: soft-link the JDK to a normalized location
-      file: src=/usr/lib/jvm/jdk1.8.0_60 dest=/usr/lib/jvm/oracle-jdk-8 owner=root group=root state=link 
+      file: src=/usr/lib/jvm/jdk1.8.0_65 dest=/usr/lib/jvm/oracle-jdk-8 owner=root group=root state=link 
     - name: Export JDK_HOME
       lineinfile: dest=/etc/environment line='JDK_HOME=/usr/lib/jvm/oracle-jdk-8'
     - name: Export JAVA_HOME
