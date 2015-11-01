@@ -126,7 +126,7 @@
     node_version: v4.2.1
   tasks:
       - name: Download Node
-        get_url: url=http://nodejs.org/dist/{{ node_version }}/node-{{ v4.2.1 }}-linux-x64.tar.gz dest=/root/node.tar.gz mode=444
+        get_url: url=http://nodejs.org/dist/{{ node_version }}/node-{{ node_version }}-linux-x64.tar.gz dest=/root/node.tar.gz mode=444
       - name: Unpack Node
         unarchive: src=/root/node.tar.gz dest=/opt copy=no owner=root group=root creates=/opt/node-{{ node_version }}-linux-x64/LICENSE
       - name: Soft-link Node
