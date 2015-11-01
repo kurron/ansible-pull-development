@@ -274,7 +274,7 @@
   sudo: False
   vars:
     dbvis_version: 9.2.12
-    dbvis_path: 9_2_12
+    dbvis_path: "9_2_12"
   tasks:
       - name: Create Software directory 
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
