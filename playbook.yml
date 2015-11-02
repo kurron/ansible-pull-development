@@ -17,6 +17,8 @@
       apt: name=subversion state=latest update_cache=true cache_valid_time=600
     - name: Install Mercurial
       apt: name=mercurial state=latest update_cache=true cache_valid_time=600
+    - name: Install XFS Tools
+      apt: name=xfsprogs state=latest update_cache=true cache_valid_time=600
 
 - name: Install Utilities
   hosts: Ubuntu
