@@ -1,8 +1,8 @@
 [Desktop Entry]
 Version=1.0
 Type=Application
-Name=CLion
-Comment=C++ IDE
+Name=0xDBE
+Comment=Database Browser
 Exec=/home/vagrant/Software/0xdbe/bin/0xdbe.sh
 Icon=/home/vagrant/Software/0xdbe/bin/0xdbe.png
 Path=
