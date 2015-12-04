@@ -269,7 +269,7 @@
       - name: Create Desktop directory
         file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
       - name: Copy desktop CLion file
-        copy: src=files/clion.desktop dest=/home/vagrant/Desktop/clion.desktop owner=vagrant group=vagrant backup=no mode=755
+        copy: src=files/CLion.desktop dest=/home/vagrant/Desktop/CLion.desktop owner=vagrant group=vagrant backup=no mode=755
       - name: Export CL_JDK
         lineinfile: dest=/etc/environment line='CL_JDK=/usr/lib/jvm/oracle-jdk-8'
       - name: Set permissions on the home directory
