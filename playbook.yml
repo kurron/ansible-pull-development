@@ -275,6 +275,32 @@
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
+- name: Jetbrains oxDBE IDE
+  hosts: Ubuntu
+  sudo: False
+  vars:
+    dbe_version: 143.1040.1 
+  tasks:
+      - name: Create Software directory
+        file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
+      - name: Create Downloads directory
+        file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
+      - name: Download 0xDBE
+        get_url: url=http://download.jetbrains.com/dbe/0xdbe-{{ dbe_version }}.tar.gz dest=/home/vagrant/Downloads/dbe.tar.gz mode=444
+      - name: Unpack 0xDBE
+        unarchive: src=/home/vagrant/Downloads/dbe.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/0xDBE-{{ dbe_version }}/build.txt
+      - name: Soft-link 0xDBE
+        file: src=/home/vagrant/Software/0xDBE-{{ dbe_version }} path=/home/vagrant/Software/0xdbe state=link
+      - name: Create Desktop directory
+        file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
+      - name: Copy desktop 0xDBE file
+        copy: src=files/0xDBE.desktop dest=/home/vagrant/Desktop/0xDBE.desktop owner=vagrant group=vagrant backup=no mode=755
+      - name: Export dbe_JDK
+        lineinfile: dest=/etc/environment line='dbe_JDK=/usr/lib/jvm/oracle-jdk-8'
+      - name: Set permissions on the home directory
+        file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
+
+
 - name: Charles proxy bits 
   hosts: Ubuntu
   sudo: False
