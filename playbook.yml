@@ -413,6 +413,15 @@
       - pip: name=setuptools
       - pip: name=httpie
 
+- name: Install Benchmarking Tools
+  hosts: Ubuntu
+  sudo: True
+  tasks:
+      - name: Install Apache Benchmark
+        apt: name=apache2-utils state=latest update_cache=true cache_valid_time=600
+      - name: Install httping
+        apt: name=httping state=latest update_cache=true cache_valid_time=600
+
 - name: Add host names for Dockered services
   hosts: Ubuntu
   sudo: True
