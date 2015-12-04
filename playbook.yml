@@ -250,6 +250,31 @@
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
+- name: Jetbrains CLion IDE
+  hosts: Ubuntu
+  sudo: False
+  vars:
+    clion_version: 1.2.1
+  tasks:
+      - name: Create Software directory
+        file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
+      - name: Create Downloads directory
+        file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
+      - name: Download CLion
+        get_url: url=http://download.jetbrains.com/cpp/clion-{{ clion_version}}.tar.gz dest=/home/vagrant/Downloads/clion.tar.gz mode=444
+      - name: Unpack CLion
+        unarchive: src=/home/vagrant/Downloads/clion.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/clion-{{ clion_version }}/build.txt
+      - name: Soft-link CLion
+        file: src=/home/vagrant/Software/clion-{{ clion_version }} path=/home/vagrant/Software/clion state=link
+      - name: Create Desktop directory
+        file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
+      - name: Copy desktop CLion file
+        copy: src=files/clion.desktop dest=/home/vagrant/Desktop/clion.desktop owner=vagrant group=vagrant backup=no mode=755
+      - name: Export CL_JDK
+        lineinfile: dest=/etc/environment line='CL_JDK=/usr/lib/jvm/oracle-jdk-8'
+      - name: Set permissions on the home directory
+        file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
+
 - name: Charles proxy bits 
   hosts: Ubuntu
   sudo: False
