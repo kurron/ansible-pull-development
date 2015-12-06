@@ -149,7 +149,7 @@
         npm: name=generator-jhipster global=yes
 
 - name: Jetbrains IntelliJ IDEA
-  hosts: Ubuntu
+  hosts: nobody
   sudo: False
   vars:
     idea_version: 15.0.1
@@ -453,7 +453,7 @@
         copy: src=files/Emacs-Docker.desktop dest=/home/vagrant/Desktop/Emacs-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
       - name: Allow connecting to the X server 
-        command: /usr/bin/xhost +
+      - lineinfile: dest=/home/vagrant/.bashrc line='/usr/bin/xhost +'
 
       - name: Copy image priming file
         copy: src=scirpts/prime-images.sh dest=/home/vagrant/bin/prime-images.sh owner=vagrant group=vagrant backup=no mode=755
