@@ -30,18 +30,24 @@ This project is intended to be invoked by the JVM Development Environment projec
 * [Bower](http://bower.io/)
 * [Grunt](http://gruntjs.com/)
 * [JHipster](https://jhipster.github.io/)
-* [IntelliJ IDEA](http://www.jetbrains.com/idea/)
-* [PyCharm](http://www.jetbrains.com/pycharm/)
-* [WebStorm](http://www.jetbrains.com/webstorm/)
-* [RubyMine](http://www.jetbrains.com/ruby/)
-* [Charles](http://www.charlesproxy.com/)
-* [DbVisualizer](https://www.dbvis.com/)
-* [logFaces](http://www.moonlit-software.com/)
+* [IntelliJ IDEA](http://www.jetbrains.com/idea/) (via Docker)
+* [PyCharm](http://www.jetbrains.com/pycharm/) (via Docker)
+* [WebStorm](http://www.jetbrains.com/webstorm/) (via Docker)
+* [RubyMine](http://www.jetbrains.com/ruby/) (via Docker)
+* [Charles](http://www.charlesproxy.com/) (via Docker)
+* [DbVisualizer](https://www.dbvis.com/) (via Docker)
+* [logFaces](http://www.moonlit-software.com/) (via Docker)
 * [MySQL Workbench](https://www.mysql.com/products/workbench/)
 * [FFmpeg](https://www.ffmpeg.org/)
 * [HTTPie](https://github.com/jkbrzt/httpie)
 
 #Troubleshooting
+
+## Slow Initial IDE Launch
+The IDEs are now run from Docker containers.  The first time a container launches, it has to grab the images from 
+the registry, which can take some time.  It can appear that the desktop icon hasn't launched correctly but it is 
+just being slow.  You can run `~bin/prime-images.sh` to preload the images and reduce the initial launch time of 
+the IDEs.
 
 #License and Credits
 This project is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/).
