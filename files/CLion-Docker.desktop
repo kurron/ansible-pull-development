@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=CLion
+Comment=C++ IDE
+Exec=/home/vagrant/GitHub/docker-clion/clion.sh
+Icon=/home/vagrant/GitHub/docker-clion/clion.svg
+Path=
+Terminal=false
+StartupNotify=true
+

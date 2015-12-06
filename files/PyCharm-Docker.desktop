@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Docker
+Comment=Python IDE
+Exec=/home/vagrant/GitHub/docker-pycharm/pycharm.sh
+Icon=/home/vagrant/GitHub/docker-pycharm/pycharm.png
+Path=
+Terminal=false
+StartupNotify=true
+

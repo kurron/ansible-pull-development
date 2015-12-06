@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=RubyMine
+Comment=Ruby IDE
+Exec=/home/vagrant/GitHub/docker-rubymine/rubymine.sh
+Icon=/home/vagrant/GitHub/docker-rubymine/rubymine.png
+Path=
+Terminal=false
+StartupNotify=true

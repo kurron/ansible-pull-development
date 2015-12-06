@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Charles
+Comment=Charles proxy
+Exec=/home/vagrant/GitHub/docker-charles-proxy/charles.sh
+Icon=/home/vagrant/GitHub/docker-charles-proxy/charles_icon.svg
+Path=
+Terminal=false
+StartupNotify=true
+
