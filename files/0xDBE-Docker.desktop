@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
 Type=Application
-Name=0xDBE
+Name=Docker
 Comment=Database Browser
 Exec=/home/vagrant/GitHub/docker-0xdbe/0xdbe.sh
 Icon=/home/vagrant/GitHub/docker-0xdbe/0xdbe.png

@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
 Type=Application
-Name=CLion
+Name=Docker
 Comment=C++ IDE
 Exec=/home/vagrant/GitHub/docker-clion/clion.sh
 Icon=/home/vagrant/GitHub/docker-clion/clion.svg

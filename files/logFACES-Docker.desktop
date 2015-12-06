@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
 Type=Application
-Name=logFACES
+Name=Docker
 Comment=Distributed Logger
 Exec=/home/vagrant/GitHub/docker-logfaces-client/logfaces.sh
 Icon=/home/vagrant/GitHub/docker-logfaces-client/icon.xpm

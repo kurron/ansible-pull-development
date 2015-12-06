@@ -399,46 +399,60 @@
         file: path=/home/vagrant/GitHub owner=vagrant group=vagrant state=directory mode=755
       - name: Create Desktop directory
         file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
+
       - name: Checkout IntelliJ Container
         git: repo=https://github.com/kurron/docker-intellij.git dest=/home/vagrant/GitHub/docker-intellij
       - name: Copy desktop IntelliJ file
         copy: src=files/IntelliJ-Docker.desktop dest=/home/vagrant/Desktop/IntelliJ-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+
       - name: Checkout PyCharm Container
         git: repo=https://github.com/kurron/docker-pycharm.git dest=/home/vagrant/GitHub/docker-pycharm
       - name: Copy desktop PyCharm file
         copy: src=files/PyCharm-Docker.desktop dest=/home/vagrant/Desktop/PyCharm-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+
       - name: Checkout WebStorm Container
         git: repo=https://github.com/kurron/docker-webstorm.git dest=/home/vagrant/GitHub/docker-webstorm
       - name: Copy desktop WebStorm file
         copy: src=files/WebStorm-Docker.desktop dest=/home/vagrant/Desktop/WebStorm-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+
       - name: Checkout RubyMine Container
         git: repo=https://github.com/kurron/docker-rubymine.git dest=/home/vagrant/GitHub/docker-rubymine
       - name: Copy desktop RubyMine file
         copy: src=files/RubyMine-Docker.desktop dest=/home/vagrant/Desktop/RubyMine-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
-      - name: Copy desktop CLion file
-        copy: src=files/CLion-Docker.desktop dest=/home/vagrant/Desktop/CLion-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+
       - name: Checkout CLion Container
         git: repo=https://github.com/kurron/docker-clion.git dest=/home/vagrant/GitHub/docker-clion
-      - name: Copy desktop 0xDBE file
-        copy: src=files/0xDBE-Docker.desktop dest=/home/vagrant/Desktop/0xDBE-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+      - name: Copy desktop CLion file
+        copy: src=files/CLion-Docker.desktop dest=/home/vagrant/Desktop/CLion-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+
       - name: Checkout 0xDBE Container
         git: repo=https://github.com/kurron/docker-0xdbe.git dest=/home/vagrant/GitHub/docker-0xdbe
-      - name: Copy desktop Charles file
-        copy: src=files/Charles-Docker.desktop dest=/home/vagrant/Desktop/Charles-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+      - name: Copy desktop 0xDBE file
+        copy: src=files/0xDBE-Docker.desktop dest=/home/vagrant/Desktop/0xDBE-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+
       - name: Checkout Charles Container
         git: repo=https://github.com/kurron/docker-charles-proxy.git dest=/home/vagrant/GitHub/docker-charles-proxy
-      - name: Copy desktop DbVisualizer file
-        copy: src=files/Database-Docker.desktop dest=/home/vagrant/Desktop/Database-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+      - name: Copy desktop Charles file
+        copy: src=files/Charles-Docker.desktop dest=/home/vagrant/Desktop/Charles-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+
       - name: Checkout DbVisualizer Container
         git: repo=https://github.com/kurron/docker-dbvisualizer.git dest=/home/vagrant/GitHub/docker-dbvisualizer
-      - name: Copy desktop logFaces file
-        copy: src=files/logFACES-Docker.desktop dest=/home/vagrant/Desktop/logFACES-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+      - name: Copy desktop DbVisualizer file
+        copy: src=files/Database-Docker.desktop dest=/home/vagrant/Desktop/Database-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+
       - name: Checkout logFaces Container
         git: repo=https://github.com/kurron/docker-logfaces-client.git dest=/home/vagrant/GitHub/docker-logfaces-client
-      - name: Copy desktop Emacs file
-        copy: src=files/Emacs-Docker.desktop dest=/home/vagrant/Desktop/Emacs-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+      - name: Copy desktop logFaces file
+        copy: src=files/logFACES-Docker.desktop dest=/home/vagrant/Desktop/logFACES-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+
       - name: Checkout Emacs Container
         git: repo=https://github.com/kurron/docker-emacs.git dest=/home/vagrant/GitHub/docker-emacs
+      - name: Copy desktop Emacs file
+        copy: src=files/Emacs-Docker.desktop dest=/home/vagrant/Desktop/Emacs-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+
+      - name: Allow connecting to the X server 
+        command: /usr/bin/xhost +
+
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
