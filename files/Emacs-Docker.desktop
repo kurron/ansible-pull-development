@@ -1,8 +1,8 @@
 [Desktop Entry]
 Version=1.0
 Type=Application
-Name=Database
-Comment=Database Browser
+Name=Docker
+Comment=Text Edito
 Exec=/home/vagrant/GitHub/docker-emacs/emacs.sh
 Icon=emacs24
 Path=
