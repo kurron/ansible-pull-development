@@ -432,7 +432,7 @@
       - name: Checkout DbVisualizer Container
         git: repo=https://github.com/kurron/docker-dbvisualizer.git dest=/home/vagrant/GitHub/docker-dbvisualizer
       - name: Copy desktop logFaces file
-        copy: src=files/logfaces-Docker.desktop dest=/home/vagrant/Desktop/logfaces-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+        copy: src=files/logFACES-Docker.desktop dest=/home/vagrant/Desktop/logFACES-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
       - name: Checkout logFaces Container
         git: repo=https://github.com/kurron/docker-logfaces-client.git dest=/home/vagrant/GitHub/docker-logfaces-client
       - name: Copy desktop Emacs file
