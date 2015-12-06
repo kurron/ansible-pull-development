@@ -399,6 +399,8 @@
         file: path=/home/vagrant/GitHub owner=vagrant group=vagrant state=directory mode=755
       - name: Create Desktop directory
         file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
+      - name: Create bin directory
+        file: path=/home/vagrant/bin owner=vagrant group=vagrant state=directory mode=755
 
       - name: Checkout IntelliJ Container
         git: repo=https://github.com/kurron/docker-intellij.git dest=/home/vagrant/GitHub/docker-intellij
@@ -452,6 +454,9 @@
 
       - name: Allow connecting to the X server 
         command: /usr/bin/xhost +
+
+      - name: Copy image priming file
+        copy: src=scirpts/prime-images.sh dest=/home/vagrant/bin/prime-images.sh owner=vagrant group=vagrant backup=no mode=755
 
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
