@@ -456,7 +456,7 @@
         lineinfile: dest=/home/vagrant/.bashrc line='/usr/bin/xhost +'
 
       - name: Copy image priming file
-        copy: src=scirpts/prime-images.sh dest=/home/vagrant/bin/prime-images.sh owner=vagrant group=vagrant backup=no mode=755
+        copy: src=scripts/prime-images.sh dest=/home/vagrant/bin/prime-images.sh owner=vagrant group=vagrant backup=no mode=755
 
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
