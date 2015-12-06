@@ -2,7 +2,7 @@
 Version=1.0
 Type=Application
 Name=Docker
-Comment=Text Edito
+Comment=Text Editor
 Exec=/home/vagrant/GitHub/docker-emacs/emacs.sh
 Icon=emacs24
 Path=
