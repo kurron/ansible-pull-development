@@ -453,7 +453,7 @@
         copy: src=files/Emacs-Docker.desktop dest=/home/vagrant/Desktop/Emacs-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
       - name: Allow connecting to the X server 
-      - lineinfile: dest=/home/vagrant/.bashrc line='/usr/bin/xhost +'
+        lineinfile: dest=/home/vagrant/.bashrc line='/usr/bin/xhost +'
 
       - name: Copy image priming file
         copy: src=scirpts/prime-images.sh dest=/home/vagrant/bin/prime-images.sh owner=vagrant group=vagrant backup=no mode=755
