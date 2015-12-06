@@ -391,6 +391,21 @@
       - name: Copy lazybones configurations file
         copy: src=files/config.groovy dest=/home/vagrant/.lazybones/config.groovy owner=vagrant group=vagrant backup=no mode=744
 
+- name: Install Docker Container Launchers
+  hosts: Ubuntu
+  sudo: False
+  tasks:
+      - name: Create GitHub directory
+        file: path=/home/vagrant/GitHub owner=vagrant group=vagrant state=directory mode=755
+      - name: Create Desktop directory
+        file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
+      - name: Checkout IntelliJ Container
+        git: repo=https://github.com/kurron/docker-intellij.git dest=/home/vagrant/GitHub/docker-intellij
+      - name: Copy desktop IntelliJ file
+        copy: src=files/IntelliJ-Docker.desktop dest=/home/vagrant/Desktop/IntelliJ-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+      - name: Set permissions on the home directory
+        file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
+
 - name: FFmpeg binary
   hosts: Ubuntu
   sudo: True
