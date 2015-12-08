@@ -10,3 +10,4 @@ docker pull kurron/docker-logfaces-client:latest
 docker pull kurron/docker-pycharm:latest
 docker pull kurron/docker-rubymine:latest
 docker pull kurron/docker-webstorm:latest
+docker pull kurron/docker-mps:latest
