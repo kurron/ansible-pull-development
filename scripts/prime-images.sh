@@ -11,3 +11,4 @@ docker pull kurron/docker-pycharm:latest
 docker pull kurron/docker-rubymine:latest
 docker pull kurron/docker-webstorm:latest
 docker pull kurron/docker-mps:latest
+docker pull kurron/docker-jmeter:latest
