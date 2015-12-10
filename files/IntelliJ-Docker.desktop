@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
 Type=Application
-Name=Docker
+Name=IDEA
 Comment=Java IDE
 Exec=/home/vagrant/GitHub/docker-intellij/idea.sh
 Icon=/home/vagrant/GitHub/docker-intellij/idea.png

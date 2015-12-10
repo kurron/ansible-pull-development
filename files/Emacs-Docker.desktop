@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
 Type=Application
-Name=Docker
+Name=Emacs
 Comment=Text Editor
 Exec=/home/vagrant/GitHub/docker-emacs/emacs.sh
 Icon=/usr/share/icons/gnome/scalable/places/ubuntu-logo.svg

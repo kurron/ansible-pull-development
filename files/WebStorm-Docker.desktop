@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
 Type=Application
-Name=Docker
+Name=WebStorm
 Comment=Javascript IDE
 Exec=/home/vagrant/GitHub/docker-webstorm/webstorm.sh
 Icon=/home/vagrant/GitHub/docker-webstorm/webide.png

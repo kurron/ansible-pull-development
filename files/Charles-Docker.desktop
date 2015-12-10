@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
 Type=Application
-Name=Docker
+Name=Charles
 Comment=Network Debugging Proxy
 Exec=/home/vagrant/GitHub/docker-charles-proxy/charles.sh
 Icon=/home/vagrant/GitHub/docker-charles-proxy/charles_icon.svg

@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
 Type=Application
-Name=Docker
+Name=DbVisualizer
 Comment=Database Browser
 Exec=/home/vagrant/GitHub/docker-dbvisualizer/dbvis.sh
 Icon=/home/vagrant/GitHub/docker-dbvisualizer/i4j_extf_6_1bd0g0g_gi8hmy.ico
