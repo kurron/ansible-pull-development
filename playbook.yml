@@ -452,6 +452,11 @@
       - name: Copy desktop Emacs file
         copy: src=files/Emacs-Docker.desktop dest=/home/vagrant/Desktop/Emacs-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
+      - name: Checkout JMeter Container
+        git: repo=https://github.com/kurron/docker-jmeter.git dest=/home/vagrant/GitHub/docker-jmeter
+      - name: Copy desktop JMeter file
+        copy: src=files/JMeter-Docker.desktop dest=/home/vagrant/Desktop/JMeter-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+
       - name: Allow connecting to the X server 
         lineinfile: dest=/home/vagrant/.bashrc line='/usr/bin/xhost +'
 

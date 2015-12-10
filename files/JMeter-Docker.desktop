@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=JMeter
+Comment=Load Generator
+Exec=/home/vagrant/GitHub/docker-jmeter/jmeter.sh
+Icon=/home/vagrant/GitHub/docker-jmeter/jmeter.png
+Path=
+Terminal=false
+StartupNotify=true
+
