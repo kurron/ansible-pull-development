@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Android Studio
+Comment=Android IDE
+Exec=/home/vagrant/GitHub/docker-android-studio/studio.sh
+Icon=/home/vagrant/GitHub/docker-android-studio/studio.png
+Path=
+Terminal=false
+StartupNotify=true
+

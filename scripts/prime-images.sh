@@ -12,3 +12,4 @@ docker pull kurron/docker-rubymine:latest
 docker pull kurron/docker-webstorm:latest
 docker pull kurron/docker-mps:latest
 docker pull kurron/docker-jmeter:latest
+docker pull kurron/docker-android-studio:latest
