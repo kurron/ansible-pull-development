@@ -13,3 +13,4 @@ docker pull kurron/docker-webstorm:latest
 docker pull kurron/docker-mps:latest
 docker pull kurron/docker-jmeter:latest
 docker pull kurron/docker-android-studio:latest
+docker pull kurron/docker-php-storm:latest

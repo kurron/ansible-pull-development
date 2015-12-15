@@ -417,6 +417,11 @@
       - name: Copy desktop WebStorm file
         copy: src=files/WebStorm-Docker.desktop dest=/home/vagrant/Desktop/WebStorm-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
+      - name: Checkout PhpStorm Container
+        git: repo=https://github.com/kurron/docker-php-storm.git dest=/home/vagrant/GitHub/docker-php-storm
+      - name: Copy desktop PhpStorm file
+        copy: src=files/PhpStorm-Docker.desktop dest=/home/vagrant/Desktop/PhpStorm-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+
       - name: Checkout RubyMine Container
         git: repo=https://github.com/kurron/docker-rubymine.git dest=/home/vagrant/GitHub/docker-rubymine
       - name: Copy desktop RubyMine file
