@@ -468,10 +468,12 @@
         copy: src=files/Studio-Docker.desktop dest=/home/vagrant/Desktop/Studio-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
       - name: Checkout Ant Container
-        git: repo=https://github.com/kurron/docker-ant.git dest=https://github.com/kurron/docker-ant
+        git: repo=https://github.com/kurron/docker-ant.git dest=/home/vagrant/GitHub/docker-ant
+        file: src=/home/vagrant/GitHub/docker-ant/ant.sh path=/home/vagrant/bin/ant state=link
 
       - name: Checkout Maven Container
-        git: repo=https://github.com/kurron/docker-maven.git dest=https://github.com/kurron/docker-maven
+        git: repo=https://github.com/kurron/docker-maven.git dest=/home/vagrant/GitHub/docker-maven
+        file: src=/home/vagrant/GitHub/docker-maven/mvn.sh path=/home/vagrant/bin/mvn state=link
 
       - name: Allow connecting to the X server 
         lineinfile: dest=/home/vagrant/.bashrc line='/usr/bin/xhost +'
