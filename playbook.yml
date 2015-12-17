@@ -101,7 +101,7 @@
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
 - name: Apache Maven bits
-  hosts: Ubuntu
+  hosts: nobody
   sudo: False
   vars:
     maven_version: 3.3.3
@@ -469,6 +469,9 @@
 
       - name: Checkout Ant Container
         git: repo=https://github.com/kurron/docker-ant.git dest=https://github.com/kurron/docker-ant
+
+      - name: Checkout Maven Container
+        git: repo=https://github.com/kurron/docker-maven.git dest=https://github.com/kurron/docker-maven
 
       - name: Allow connecting to the X server 
         lineinfile: dest=/home/vagrant/.bashrc line='/usr/bin/xhost +'

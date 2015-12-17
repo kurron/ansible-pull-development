@@ -17,3 +17,4 @@ docker pull kurron/docker-php-storm:latest
 docker pull kurron/docker-aws-cli:latest
 docker pull kurron/docker-aws-ecs-cli:latest
 docker pull kurron/docker-ant:latest
+docker pull kurron/docker-maven:latest
