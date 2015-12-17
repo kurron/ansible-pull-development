@@ -14,3 +14,6 @@ docker pull kurron/docker-mps:latest
 docker pull kurron/docker-jmeter:latest
 docker pull kurron/docker-android-studio:latest
 docker pull kurron/docker-php-storm:latest
+docker pull kurron/docker-aws-cli:latest
+docker pull kurron/docker-aws-ecs-cli:latest
+docker pull kurron/docker-ant:latest

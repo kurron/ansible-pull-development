@@ -80,7 +80,7 @@
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
 - name: Apache Ant bits
-  hosts: Ubuntu
+  hosts: nobody
   sudo: False
   vars:
     ant_version: 1.9.6
@@ -466,6 +466,9 @@
         git: repo=https://github.com/kurron/docker-android-studio.git dest=/home/vagrant/GitHub/docker-android-studio
       - name: Copy desktop Android Studio file
         copy: src=files/Studio-Docker.desktop dest=/home/vagrant/Desktop/Studio-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+
+      - name: Checkout Ant Container
+        git: repo=https://github.com/kurron/docker-ant.git dest=https://github.com/kurron/docker-ant
 
       - name: Allow connecting to the X server 
         lineinfile: dest=/home/vagrant/.bashrc line='/usr/bin/xhost +'
