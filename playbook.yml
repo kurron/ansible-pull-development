@@ -477,6 +477,11 @@
       - name: Soft link Maven Container
         file: src=/home/vagrant/GitHub/docker-maven/mvn.sh path=/home/vagrant/bin/mvn state=link
 
+      - name: Checkout Java Container
+        git: repo=https://github.com/kurron/docker-java-runtime.git dest=/home/vagrant/GitHub/docker-java-runtime
+      - name: Soft link Java Container
+        file: src=/home/vagrant/GitHub/docker-java-runtime/java.sh path=/home/vagrant/bin/jrt state=link
+
       - name: Allow connecting to the X server 
         lineinfile: dest=/home/vagrant/.bashrc line='/usr/bin/xhost +'
 

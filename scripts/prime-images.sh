@@ -18,3 +18,6 @@ docker pull kurron/docker-aws-cli:latest
 docker pull kurron/docker-aws-ecs-cli:latest
 docker pull kurron/docker-ant:latest
 docker pull kurron/docker-maven:latest
+docker pull kurron/docker-packer:latest
+docker pull kurron/docker-terraform:latest
+docker pull kurron/docker-java-runtime:latest
