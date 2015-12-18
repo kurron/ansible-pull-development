@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=MPS
+Comment=DSL IDE
+Exec=/home/vagrant/GitHub/docker-mps/mps.sh
+Icon=/home/vagrant/GitHub/docker-mps/mps.png
+Path=
+Terminal=false
+StartupNotify=true
+

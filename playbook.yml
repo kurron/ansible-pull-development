@@ -467,6 +467,11 @@
       - name: Copy desktop Android Studio file
         copy: src=files/Studio-Docker.desktop dest=/home/vagrant/Desktop/Studio-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
+      - name: Checkout MPS Container
+        git: repo=https://github.com/kurron/docker-mps.git dest=/home/vagrant/GitHub/docker-mps
+      - name: Copy desktop MPS file
+        copy: src=files/MPS-Docker.desktop dest=/home/vagrant/Desktop/MPS-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+
       - name: Checkout Ant Container
         git: repo=https://github.com/kurron/docker-ant.git dest=/home/vagrant/GitHub/docker-ant
       - name: Soft link Ant Container
