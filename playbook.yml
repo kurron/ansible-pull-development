@@ -487,6 +487,17 @@
       - name: Soft link Java Container
         file: src=/home/vagrant/GitHub/docker-java-runtime/java.sh path=/home/vagrant/bin/jrt state=link
 
+      - name: Checkout Scala Container
+        git: repo=https://github.com/kurron/docker-scala.git dest=/home/vagrant/GitHub/docker-scala
+      - name: Soft link FSC Command
+        file: src=/home/vagrant/GitHub/docker-scala/fsc.sh path=/home/vagrant/bin/fsc state=link
+      - name: Soft link scalac Command
+        file: src=/home/vagrant/GitHub/docker-scala/scalac.sh path=/home/vagrant/bin/scalac state=link
+      - name: Soft link Scala REPL Command
+        file: src=/home/vagrant/GitHub/docker-scala/scala-repl.sh path=/home/vagrant/bin/scala-repl state=link
+      - name: Soft link Scala Command
+        file: src=/home/vagrant/GitHub/docker-scala/scala.sh path=/home/vagrant/bin/scala state=link
+
       - name: Allow connecting to the X server 
         lineinfile: dest=/home/vagrant/.bashrc line='/usr/bin/xhost +'
 

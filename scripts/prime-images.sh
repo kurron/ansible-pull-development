@@ -21,3 +21,4 @@ docker pull kurron/docker-maven:latest
 docker pull kurron/docker-packer:latest
 docker pull kurron/docker-terraform:latest
 docker pull kurron/docker-java-runtime:latest
+docker pull kurron/docker-scala:latest
