@@ -432,9 +432,9 @@
       - name: Copy desktop CLion file
         copy: src=files/CLion-Docker.desktop dest=/home/vagrant/Desktop/CLion-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
-      - name: Checkout 0xDBE Container
+      - name: Checkout DataGrip Container
         git: repo=https://github.com/kurron/docker-0xdbe.git dest=/home/vagrant/GitHub/docker-0xdbe
-      - name: Copy desktop 0xDBE file
+      - name: Copy desktop DataGrip file
         copy: src=files/0xDBE-Docker.desktop dest=/home/vagrant/Desktop/0xDBE-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
       - name: Checkout Charles Container
@@ -514,9 +514,9 @@
     ffmpeg_version: 2.8.4
   tasks:
       - name: Download FFmpeg
-        get_url: url=http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz dest=/root/ffmpeg.tar.xz mode=444
+        get_url: url=http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz dest=/root/ffmpeg-{{ ffmpeg_version }}.tar.xz mode=444
       - name: Unpack FFmpeg
-        unarchive: src=/root/ffmpeg.tar.xz dest=/opt copy=no owner=root group=root creates=/opt/ffmpeg-{{ ffmpeg_version }}-64bit-static/ffprobe
+        unarchive: src=/root/ffmpeg-{{ ffmpeg_version }}.tar.xz dest=/opt copy=no owner=root group=root creates=/opt/ffmpeg-{{ ffmpeg_version }}-64bit-static/ffprobe
       - name: Soft-link FFmpeg
         file: src=/opt/ffmpeg-{{ ffmpeg_version }}-64bit-static path=/opt/ffmpeg state=link
       - name: Set permissions on the opt directory
