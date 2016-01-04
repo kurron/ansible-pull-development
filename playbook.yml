@@ -472,6 +472,11 @@
       - name: Copy desktop MPS file
         copy: src=files/MPS-Docker.desktop dest=/home/vagrant/Desktop/MPS-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
+      - name: Checkout STS Container
+        git: repo=https://github.com/kurron/docker-sts.git dest=/home/vagrant/GitHub/docker-sts
+      - name: Copy desktop STS file
+        copy: src=files/STS-Docker.desktop dest=/home/vagrant/Desktop/STS-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+
       - name: Checkout Ant Container
         git: repo=https://github.com/kurron/docker-ant.git dest=/home/vagrant/GitHub/docker-ant
       - name: Soft link Ant Container
