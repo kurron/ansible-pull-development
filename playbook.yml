@@ -384,8 +384,6 @@
         file: path=/home/vagrant/GitHub owner=vagrant group=vagrant state=directory mode=755
       - name: Create Bitbucket directory
         file: path=/home/vagrant/Bitbucket owner=vagrant group=vagrant state=directory mode=755
-      - name: Create Stash directory
-        file: path=/home/vagrant/Stash owner=vagrant group=vagrant state=directory mode=755
       - name: Create .lazybones directory
         file: path=/home/vagrant/.lazybones owner=vagrant group=vagrant state=directory mode=755
       - name: Copy lazybones configurations file
