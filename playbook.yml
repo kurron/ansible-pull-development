@@ -175,10 +175,10 @@
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
 - name: Jetbrain's PyCharm IDE
-  hosts: nobody
+  hosts: Ubuntu
   sudo: False
   vars:
-    pycharm_version: 5.0.1
+    pycharm_version: 5.0.3
   tasks:
       - name: Create Software directory
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
@@ -200,11 +200,11 @@
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
 - name: Jetbrain's WebStorm IDE
-  hosts: nobody
+  hosts: Ubuntu
   sudo: False
   vars:
-    webstorm_version: 10.0.4
-    webstorm_build: "141.1550"
+    webstorm_version: 11.0.3
+    webstorm_build: 143.1559.5
   tasks:
       - name: Create Software directory
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
