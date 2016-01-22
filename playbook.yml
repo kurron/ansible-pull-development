@@ -149,11 +149,11 @@
         npm: name=generator-jhipster global=yes
 
 - name: Jetbrains IntelliJ IDEA
-  hosts: nobody
+  hosts: Ubuntu
   sudo: False
   vars:
-    idea_version: 15.0.1
-    idea_build: 143.382.35
+    idea_version: 15.0.3
+    idea_build: 143.1821.5
   tasks:
       - name: Create Software directory
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
