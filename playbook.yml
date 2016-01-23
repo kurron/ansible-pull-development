@@ -400,20 +400,20 @@
       - name: Create bin directory
         file: path=/home/vagrant/bin owner=vagrant group=vagrant state=directory mode=755
 
-      - name: Checkout IntelliJ Container
-        git: repo=https://github.com/kurron/docker-intellij.git dest=/home/vagrant/GitHub/docker-intellij
-      - name: Copy desktop IntelliJ file
-        copy: src=files/IntelliJ-Docker.desktop dest=/home/vagrant/Desktop/IntelliJ-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+#     - name: Checkout IntelliJ Container
+#       git: repo=https://github.com/kurron/docker-intellij.git dest=/home/vagrant/GitHub/docker-intellij
+#     - name: Copy desktop IntelliJ file
+#       copy: src=files/IntelliJ-Docker.desktop dest=/home/vagrant/Desktop/IntelliJ-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
-      - name: Checkout PyCharm Container
-        git: repo=https://github.com/kurron/docker-pycharm.git dest=/home/vagrant/GitHub/docker-pycharm
-      - name: Copy desktop PyCharm file
-        copy: src=files/PyCharm-Docker.desktop dest=/home/vagrant/Desktop/PyCharm-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+#     - name: Checkout PyCharm Container
+#       git: repo=https://github.com/kurron/docker-pycharm.git dest=/home/vagrant/GitHub/docker-pycharm
+#     - name: Copy desktop PyCharm file
+#       copy: src=files/PyCharm-Docker.desktop dest=/home/vagrant/Desktop/PyCharm-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
-      - name: Checkout WebStorm Container
-        git: repo=https://github.com/kurron/docker-webstorm.git dest=/home/vagrant/GitHub/docker-webstorm
-      - name: Copy desktop WebStorm file
-        copy: src=files/WebStorm-Docker.desktop dest=/home/vagrant/Desktop/WebStorm-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+#     - name: Checkout WebStorm Container
+#       git: repo=https://github.com/kurron/docker-webstorm.git dest=/home/vagrant/GitHub/docker-webstorm
+#     - name: Copy desktop WebStorm file
+#       copy: src=files/WebStorm-Docker.desktop dest=/home/vagrant/Desktop/WebStorm-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
       - name: Checkout PhpStorm Container
         git: repo=https://github.com/kurron/docker-php-storm.git dest=/home/vagrant/GitHub/docker-php-storm
