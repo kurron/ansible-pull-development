@@ -514,7 +514,7 @@
   hosts: Ubuntu
   sudo: True
   vars:
-    ffmpeg_version: 2.8.5
+    ffmpeg_version: 2.8.6
   tasks:
       - name: Download FFmpeg
         get_url: url=http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz dest=/root/ffmpeg-{{ ffmpeg_version }}.tar.xz mode=444
