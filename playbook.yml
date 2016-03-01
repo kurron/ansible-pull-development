@@ -152,8 +152,8 @@
   hosts: Ubuntu
   sudo: False
   vars:
-    idea_version: 15.0.3
-    idea_build: 143.1821.5
+    idea_version: 15.0.4
+    idea_build: 143.2287.1
   tasks:
       - name: Create Software directory
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
