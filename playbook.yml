@@ -63,8 +63,8 @@
       file: path=/usr/lib/jvm owner=root group=root state=directory mode=755
     - name: unpack the archive
       unarchive: src=/root/open-jdk-8.tar.gz dest=/usr/lib/jvm copy=no owner=root group=root mode=755 creates=/usr/lib/jvm/{{ java_path }}/LICENSE
-#   - name: soft-link the JDK to a normalized location
-#     file: src=/usr/lib/jvm/{{ java_version }} dest=/usr/lib/jvm/oracle-jdk-8 owner=root group=root state=link
+    - name: soft-link the JDK to a normalized location
+      file: src=/usr/lib/jvm/{{ java_path }} dest=/usr/lib/jvm/open-jdk-8 owner=root group=root state=link
 #   - name: Export JDK_HOME
 #     lineinfile: dest=/etc/environment line='JDK_HOME=/usr/lib/jvm/oracle-jdk-8'
 #   - name: Export JAVA_HOME
