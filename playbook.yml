@@ -51,6 +51,27 @@
     - name: Export JAVA_CMD
       lineinfile: dest=/etc/environment line='JAVA_CMD=/usr/lib/jvm/oracle-jdk-8/bin/java'
 
+- name: Install Open JDK
+  hosts: Ubuntu
+  sudo: True
+  vars:
+    java_path: zulu8.13.0.5-jdk8.0.72-linux_x64
+  tasks:
+    - name: Download Java 8 Open JDK
+      command: wget --quiet --output-document=/root/open-jdk-8.tar.gz http://cdn.azul.com/zulu/bin/zulu8.13.0.5-jdk8.0.72-linux_x64.tar.gz
+    - name: Create destination directory
+      file: path=/usr/lib/jvm owner=root group=root state=directory mode=755
+    - name: unpack the archive
+      unarchive: src=/root/open-jdk-8.tar.gz dest=/usr/lib/jvm copy=no owner=root group=root mode=755 creates=/usr/lib/jvm/{{ java_path }}/LICENSE
+#   - name: soft-link the JDK to a normalized location
+#     file: src=/usr/lib/jvm/{{ java_version }} dest=/usr/lib/jvm/oracle-jdk-8 owner=root group=root state=link
+#   - name: Export JDK_HOME
+#     lineinfile: dest=/etc/environment line='JDK_HOME=/usr/lib/jvm/oracle-jdk-8'
+#   - name: Export JAVA_HOME
+#     lineinfile: dest=/etc/environment line='JAVA_HOME=/usr/lib/jvm/oracle-jdk-8'
+#   - name: Export JAVA_CMD
+#     lineinfile: dest=/etc/environment line='JAVA_CMD=/usr/lib/jvm/oracle-jdk-8/bin/java'
+
 - name: Install The Software Development Kit Manager
   hosts: Ubuntu
   sudo: True
