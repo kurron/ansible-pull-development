@@ -173,15 +173,15 @@
   hosts: Ubuntu
   sudo: False
   vars:
-    idea_version: 15.0.4
-    idea_build: 143.2287.1
+    idea_version: 2016.1
+    idea_build: 145.258.11
   tasks:
       - name: Create Software directory
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
       - name: Create Downloads directory
         file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
       - name: Download IntelliJ IDEA
-        get_url: url=http://download.jetbrains.com/idea/ideaIU-{{ idea_version }}.tar.gz dest=/home/vagrant/Downloads/idea-{{ idea_version }}.tar.gz mode=444
+        get_url: url=https://download.jetbrains.com/idea/ideaIU-{{ idea_version }}.tar.gz dest=/home/vagrant/Downloads/idea-{{ idea_version }}.tar.gz mode=444
       - name: Unpack IntelliJ IDEA
         unarchive: src=/home/vagrant/Downloads/idea-{{ idea_version }}.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/idea-IU-{{ idea_build }}/build.txt
       - name: Soft-link IntelliJ
