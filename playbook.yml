@@ -311,7 +311,7 @@
       - name: Unpack DataGrip
         unarchive: src=/home/vagrant/Downloads/datagrip-{{ dg_version }}.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/DataGrip-{{ dg_version }}/build.txt
       - name: Soft-link DataGrip
-        file: src=/home/vagrant/Software/DataGrip-{{ dbe_version }} path=/home/vagrant/Software/datagrip state=link
+        file: src=/home/vagrant/Software/DataGrip-{{ dg_version }} path=/home/vagrant/Software/datagrip state=link
       - name: Create Desktop directory
         file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
       - name: Copy desktop DataGrip file
