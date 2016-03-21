@@ -296,28 +296,28 @@
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
-- name: Jetbrains oxDBE IDE
-  hosts: nobody
+- name: Jetbrains DataGrip IDE
+  hosts: Ubuntu
   sudo: False
   vars:
-    dbe_version: 143.1040.1 
+    dg_version: 1.0.3
   tasks:
       - name: Create Software directory
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
       - name: Create Downloads directory
         file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
-      - name: Download 0xDBE
-        get_url: url=http://download.jetbrains.com/dbe/0xdbe-{{ dbe_version }}.tar.gz dest=/home/vagrant/Downloads/dbe.tar.gz mode=444
-      - name: Unpack 0xDBE
-        unarchive: src=/home/vagrant/Downloads/dbe.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/0xDBE-{{ dbe_version }}/build.txt
-      - name: Soft-link 0xDBE
-        file: src=/home/vagrant/Software/0xDBE-{{ dbe_version }} path=/home/vagrant/Software/0xdbe state=link
+      - name: Download DataGrip
+        get_url: url=http://download.jetbrains.com/dbe/datagrip-{{ dg_version }}-custom-jdk-linux.tar.gz dest=/home/vagrant/Downloads/datagrip-{{ dg_version }}.tar.gz mode=444
+      - name: Unpack DataGrip
+        unarchive: src=/home/vagrant/Downloads/datagrip-{{ dg_version }}.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/DataGrip-{{ dg_version }}/build.txt
+      - name: Soft-link DataGrip
+        file: src=/home/vagrant/Software/DataGrip-{{ dbe_version }} path=/home/vagrant/Software/datagrip state=link
       - name: Create Desktop directory
         file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
-      - name: Copy desktop 0xDBE file
-        copy: src=files/0xDBE.desktop dest=/home/vagrant/Desktop/0xDBE.desktop owner=vagrant group=vagrant backup=no mode=755
-      - name: Export dbe_JDK
-        lineinfile: dest=/etc/environment line='dbe_JDK=/usr/lib/jvm/oracle-jdk-8'
+      - name: Copy desktop DataGrip file
+        copy: src=files/DataGrip.desktop dest=/home/vagrant/Desktop/DataGrip.desktop owner=vagrant group=vagrant backup=no mode=755
+      - name: Export DataGrip
+        lineinfile: dest=/etc/environment line='DATAGRIP_JDK=/usr/lib/jvm/oracle-jdk-8'
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
@@ -451,20 +451,20 @@
       - name: Copy desktop CLion file
         copy: src=files/CLion-Docker.desktop dest=/home/vagrant/Desktop/CLion-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
-      - name: Checkout DataGrip Container
-        git: repo=https://github.com/kurron/docker-0xdbe.git dest=/home/vagrant/GitHub/docker-0xdbe
-      - name: Copy desktop DataGrip file
-        copy: src=files/0xDBE-Docker.desktop dest=/home/vagrant/Desktop/0xDBE-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+#     - name: Checkout DataGrip Container
+#       git: repo=https://github.com/kurron/docker-0xdbe.git dest=/home/vagrant/GitHub/docker-0xdbe
+#     - name: Copy desktop DataGrip file
+#       copy: src=files/0xDBE-Docker.desktop dest=/home/vagrant/Desktop/0xDBE-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
       - name: Checkout Charles Container
         git: repo=https://github.com/kurron/docker-charles-proxy.git dest=/home/vagrant/GitHub/docker-charles-proxy
       - name: Copy desktop Charles file
         copy: src=files/Charles-Docker.desktop dest=/home/vagrant/Desktop/Charles-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
-      - name: Checkout DbVisualizer Container
-        git: repo=https://github.com/kurron/docker-dbvisualizer.git dest=/home/vagrant/GitHub/docker-dbvisualizer
-      - name: Copy desktop DbVisualizer file
-        copy: src=files/Database-Docker.desktop dest=/home/vagrant/Desktop/Database-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+#     - name: Checkout DbVisualizer Container
+#       git: repo=https://github.com/kurron/docker-dbvisualizer.git dest=/home/vagrant/GitHub/docker-dbvisualizer
+#     - name: Copy desktop DbVisualizer file
+#       copy: src=files/Database-Docker.desktop dest=/home/vagrant/Desktop/Database-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
       - name: Checkout logFaces Container
         git: repo=https://github.com/kurron/docker-logfaces-client.git dest=/home/vagrant/GitHub/docker-logfaces-client
