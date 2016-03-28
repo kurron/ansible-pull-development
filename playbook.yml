@@ -33,15 +33,15 @@
   hosts: Ubuntu
   sudo: True
   vars:
-    java_version: jdk1.8.0_72
-    java_path: 8u72-b15/jdk-8u72
+    java_version: jdk1.8.0_77
+    java_path: 8u77-b03/jdk-8u77
   tasks:
     - name: Download Java 8 JDK
-      command: wget --quiet --output-document=/root/jdk-8.tar.gz --no-check-certificate --no-cookies --header "Cookie:oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/{{ java_path }}-linux-x64.tar.gz
+      command: wget --quiet --output-document=/root/jdk-8-{{ java_version }}.tar.gz --no-check-certificate --no-cookies --header "Cookie:oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/{{ java_path }}-linux-x64.tar.gz
     - name: Create destination directory
       file: path=/usr/lib/jvm owner=root group=root state=directory mode=755
     - name: unpack the archive
-      unarchive: src=/root/jdk-8.tar.gz dest=/usr/lib/jvm copy=no owner=root group=root mode=755 creates=/usr/lib/jvm/{{ java_version }}/COPYRIGHT
+      unarchive: src=/root/jdk-8-{{ java_version }}.tar.gz dest=/usr/lib/jvm copy=no owner=root group=root mode=755 creates=/usr/lib/jvm/{{ java_version }}/COPYRIGHT
     - name: soft-link the JDK to a normalized location
       file: src=/usr/lib/jvm/{{ java_version }} dest=/usr/lib/jvm/oracle-jdk-8 owner=root group=root state=link
     - name: Export JDK_HOME
