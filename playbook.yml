@@ -146,7 +146,7 @@
   hosts: Ubuntu
   sudo: True
   vars:
-    node_version: v4.4.0
+    node_version: v4.4.1
   tasks:
       - name: Download Node
         get_url: url=http://nodejs.org/dist/{{ node_version }}/node-{{ node_version }}-linux-x64.tar.gz dest=/root/node-{{ node_version }}.tar.gz mode=444
