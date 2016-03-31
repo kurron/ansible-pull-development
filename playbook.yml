@@ -534,7 +534,8 @@
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
 - name: FFmpeg binary
-  hosts: Ubuntu
+# hosts: Ubuntu
+  hosts: nobody
   sudo: True
   vars:
     ffmpeg_version: 3.0
