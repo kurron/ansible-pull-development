@@ -226,8 +226,8 @@
   hosts: Ubuntu
   sudo: False
   vars:
-    webstorm_version: 2016.1
-    webstorm_build: 145.258.3
+    webstorm_version: 2016.1.1
+    webstorm_build: 145.597.6
   tasks:
       - name: Create Software directory
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
