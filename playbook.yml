@@ -199,7 +199,7 @@
   hosts: Ubuntu
   sudo: False
   vars:
-    pycharm_version: 2016.1
+    pycharm_version: 2016.1.2
   tasks:
       - name: Create Software directory
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
