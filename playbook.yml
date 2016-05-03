@@ -9,7 +9,7 @@
 
 - name: Install Version Control Systems
   hosts: Ubuntu
-  sudo: True
+  become: True
   tasks:
     - name: Install Git
       apt: name=git state=latest update_cache=true cache_valid_time=600
@@ -22,14 +22,14 @@
 
 - name: Install Utilities
   hosts: Ubuntu
-  sudo: True
+  become: True
   tasks:
     - name: Install sshpass for some of the Docker scripting
       apt: name=sshpass state=latest update_cache=true cache_valid_time=600
 
 - name: Install JDK
   hosts: Ubuntu
-  sudo: True
+  become: True
   vars:
     java_version: jdk1.8.0_77
     java_path: 8u77-b03/jdk-8u77
@@ -51,7 +51,7 @@
 
 - name: Install Open JDK
   hosts: Ubuntu
-  sudo: True
+  become: True
   vars:
     java_path: zulu8.13.0.5-jdk8.0.72-linux_x64
   tasks:
@@ -72,7 +72,7 @@
 
 - name: Install The Software Development Kit Manager
   hosts: Ubuntu
-  sudo: True
+  become: True
   tasks:
     - name: Install cURL
       apt: name=curl state=latest
@@ -89,7 +89,7 @@
 
 - name: Install Clojure
   hosts: Ubuntu
-  sudo: False
+  become: False
   tasks:
       - name: Create bin directory
         file: path=/home/vagrant/bin owner=vagrant group=vagrant state=directory mode=755
@@ -100,7 +100,7 @@
 
 - name: Apache Ant bits
   hosts: nobody
-  sudo: False
+  become: False
   vars:
     ant_version: 1.9.6
   tasks:
@@ -121,7 +121,7 @@
 
 - name: Apache Maven bits
   hosts: nobody
-  sudo: False
+  become: False
   vars:
     maven_version: 3.3.3
   tasks:
@@ -142,7 +142,7 @@
 
 - name: Node
   hosts: Ubuntu
-  sudo: True
+  become: True
   vars:
     node_version: v4.4.1
   tasks:
@@ -171,7 +171,7 @@
 
 - name: Jetbrains IntelliJ IDEA
   hosts: Ubuntu
-  sudo: False
+  become: False
   vars:
     idea_version: 2016.1.1
     idea_build: 145.597.3
@@ -197,7 +197,7 @@
 
 - name: Jetbrain's PyCharm IDE
   hosts: Ubuntu
-  sudo: False
+  become: False
   vars:
     pycharm_version: 2016.1.2
   tasks:
@@ -222,7 +222,7 @@
 
 - name: Jetbrain's WebStorm IDE
   hosts: Ubuntu
-  sudo: False
+  become: False
   vars:
     webstorm_version: 2016.1.1
     webstorm_build: 145.597.6
@@ -248,7 +248,7 @@
 
 - name: Jetbrain's RubyMine IDE
   hosts: nobody
-  sudo: False
+  become: False
   vars:
     rubymine_version: 7.1.4
   tasks:
@@ -273,7 +273,7 @@
 
 - name: Jetbrains CLion IDE
   hosts: nobody
-  sudo: False
+  become: False
   vars:
     clion_version: 1.2.1
   tasks:
@@ -298,7 +298,7 @@
 
 - name: Jetbrains DataGrip IDE
   hosts: Ubuntu
-  sudo: False
+  become: False
   vars:
     dg_version: 2016.1
   tasks:
@@ -324,7 +324,7 @@
 
 - name: Charles proxy bits 
   hosts: nobody
-  sudo: False
+  become: False
   vars:
     charles_version: 3.11.1
   tasks:
@@ -345,7 +345,7 @@
 
 - name: DbVisualizer Database Browser 
   hosts: nobody
-  sudo: False
+  become: False
   vars:
     dbvis_version: 9.2.12
     dbvis_path: "9_2_12"
@@ -367,7 +367,7 @@
 
 - name: logFACES Client 
   hosts: nobody
-  sudo: False
+  become: False
   vars:
     logfaces_version: 4.2.1
   tasks:
@@ -390,7 +390,7 @@
 
 - name: MySQL Tools
   hosts: Ubuntu
-  sudo: True
+  become: True
   tasks:
       - name: Install MySQL client
         apt: name=mysql-client state=latest
@@ -399,7 +399,7 @@
 
 - name: Create Source Folders
   hosts: Ubuntu
-  sudo: False
+  become: False
   tasks:
       - name: Create GitHub directory
         file: path=/home/vagrant/GitHub owner=vagrant group=vagrant state=directory mode=755
@@ -412,7 +412,7 @@
 
 - name: Install Docker Container Launchers
   hosts: Ubuntu
-  sudo: False
+  become: False
   tasks:
       - name: Create GitHub directory
         file: path=/home/vagrant/GitHub owner=vagrant group=vagrant state=directory mode=755
@@ -534,7 +534,7 @@
 - name: FFmpeg binary
 # hosts: Ubuntu
   hosts: nobody
-  sudo: True
+  become: True
   vars:
     ffmpeg_version: 3.0
   tasks:
@@ -549,20 +549,20 @@
 
 - name: Install HTTP IE (cURL replacement)
   hosts: Ubuntu
-  sudo: True
+  become: True
   tasks:
       - pip: name=setuptools
       - pip: name=httpie
 
 - name: Install Python Development Tools
   hosts: Ubuntu
-  sudo: True
+  become: True
   tasks:
       - pip: name=virtualenv
 
 - name: Install Benchmarking Tools
   hosts: Ubuntu
-  sudo: True
+  become: True
   tasks:
       - name: Install Apache Benchmark
         apt: name=apache2-utils state=latest update_cache=true cache_valid_time=600
@@ -571,7 +571,7 @@
 
 - name: Add host names for Dockered services
   hosts: Ubuntu
-  sudo: True
+  become: True
   tasks:
       - lineinfile: dest=/etc/hosts line='127.0.0.1 mongo'
       - lineinfile: dest=/etc/hosts line='127.0.0.1 mongodb'
