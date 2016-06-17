@@ -31,8 +31,8 @@
   hosts: Ubuntu
   become: True
   vars:
-    java_version: jdk1.8.0_77
-    java_path: 8u77-b03/jdk-8u77
+    java_version: jdk1.8.0_91
+    java_path: 8u91-b14/jdk-8u91
   tasks:
     - name: Download Java 8 JDK
       command: wget --quiet --output-document=/root/jdk-8-{{ java_version }}.tar.gz --no-check-certificate --no-cookies --header "Cookie:oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/{{ java_path }}-linux-x64.tar.gz
