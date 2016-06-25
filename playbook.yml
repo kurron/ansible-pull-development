@@ -98,6 +98,7 @@
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
+# SDKMAN! can install this now
 - name: Apache Ant bits
   hosts: nobody
   become: False
@@ -119,6 +120,7 @@
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
+# SDKMAN! can install this now
 - name: Apache Maven bits
   hosts: nobody
   become: False
@@ -144,7 +146,7 @@
   hosts: Ubuntu
   become: True
   vars:
-    node_version: v4.4.1
+    node_version: v4.4.6
   tasks:
       - name: Download Node
         get_url: url=http://nodejs.org/dist/{{ node_version }}/node-{{ node_version }}-linux-x64.tar.gz dest=/root/node-{{ node_version }}.tar.gz mode=444
@@ -246,6 +248,7 @@
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
+# currently available via a Docker container
 - name: Jetbrain's RubyMine IDE
   hosts: nobody
   become: False
@@ -271,6 +274,7 @@
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
+# currently available via a Docker container
 - name: Jetbrains CLion IDE
   hosts: nobody
   become: False
@@ -300,7 +304,7 @@
   hosts: Ubuntu
   become: False
   vars:
-    dg_version: 2016.1
+    dg_version: 2016.1.1
   tasks:
       - name: Create Software directory
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
@@ -322,6 +326,7 @@
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
 
+# currently available via a Docker container
 - name: Charles proxy bits 
   hosts: nobody
   become: False
@@ -343,6 +348,7 @@
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
+# currently available via a Docker container
 - name: DbVisualizer Database Browser 
   hosts: nobody
   become: False
@@ -365,6 +371,7 @@
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
+# currently available via a Docker container
 - name: logFACES Client 
   hosts: nobody
   become: False
@@ -496,15 +503,15 @@
       - name: Copy desktop STS file
         copy: src=files/STS-Docker.desktop dest=/home/vagrant/Desktop/STS-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
-      - name: Checkout Ant Container
-        git: repo=https://github.com/kurron/docker-ant.git dest=/home/vagrant/GitHub/docker-ant
-      - name: Soft link Ant Container
-        file: src=/home/vagrant/GitHub/docker-ant/ant.sh path=/home/vagrant/bin/ant state=link
+#     - name: Checkout Ant Container
+#       git: repo=https://github.com/kurron/docker-ant.git dest=/home/vagrant/GitHub/docker-ant
+#     - name: Soft link Ant Container
+#       file: src=/home/vagrant/GitHub/docker-ant/ant.sh path=/home/vagrant/bin/ant state=link
 
-      - name: Checkout Maven Container
-        git: repo=https://github.com/kurron/docker-maven.git dest=/home/vagrant/GitHub/docker-maven
-      - name: Soft link Maven Container
-        file: src=/home/vagrant/GitHub/docker-maven/mvn.sh path=/home/vagrant/bin/mvn state=link
+#     - name: Checkout Maven Container
+#       git: repo=https://github.com/kurron/docker-maven.git dest=/home/vagrant/GitHub/docker-maven
+#     - name: Soft link Maven Container
+#       file: src=/home/vagrant/GitHub/docker-maven/mvn.sh path=/home/vagrant/bin/mvn state=link
 
       - name: Checkout Java Container
         git: repo=https://github.com/kurron/docker-java-runtime.git dest=/home/vagrant/GitHub/docker-java-runtime
