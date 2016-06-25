@@ -170,6 +170,9 @@
         npm: name=gulp global=yes
       - name: Install JHipster 
         npm: name=generator-jhipster global=yes
+      - name: Install nvm
+        npm: name=nvm global=yes
+# we are supposed to update the path to export PATH=./node_modules/.bin:$PATH but I'm not exactly sure what the best way to do that is yet
 
 - name: Jetbrains IntelliJ IDEA
   hosts: Ubuntu
