@@ -167,7 +167,7 @@
       - name: Install Grunt 
         npm: name=grunt-cli global=yes
       - name: Install Gulp
-        npm: name=gulp global=yes
+        npm: name=gulp-cli global=yes
       - name: Install JHipster 
         npm: name=generator-jhipster global=yes
       - name: Install nvm
