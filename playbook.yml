@@ -156,22 +156,32 @@
         file: src=/opt/node-{{ node_version }}-linux-x64/bin/node path=/usr/local/bin/node state=link
       - name: Soft-link NPM
         file: src=/opt/node-{{ node_version }}-linux-x64/bin/npm path=/usr/local/bin/npm state=link
-      - name: Set permissions on the opt directory
-        file: path=/opt owner=root group=root recurse=true state=directory
       - name: Update npm
         command: /usr/local/bin/npm install -g npm@latest
       - name: Install Yeoman 
         npm: name=yo global=yes
+      - name: Soft-link Yeoman
+        file: src=/opt/node-{{ node_version }}-linux-x64/bin/yo path=/usr/local/bin/yo state=link
       - name: Install Bower 
         npm: name=bower global=yes
+      - name: Soft-link Bower
+        file: src=/opt/node-{{ node_version }}-linux-x64/bin/bower path=/usr/local/bin/bower state=link
       - name: Install Grunt 
         npm: name=grunt-cli global=yes
+      - name: Soft-link Grunt
+        file: src=/opt/node-{{ node_version }}-linux-x64/bin/grunt path=/usr/local/bin/grunt state=link
       - name: Install Gulp
         npm: name=gulp-cli global=yes
+      - name: Soft-link Gulp
+        file: src=/opt/node-{{ node_version }}-linux-x64/bin/gulp path=/usr/local/bin/gulp state=link
       - name: Install JHipster 
         npm: name=generator-jhipster global=yes
       - name: Install nvm
         npm: name=nvm global=yes
+      - name: Soft-link nvm
+        file: src=/opt/node-{{ node_version }}-linux-x64/bin/nvm path=/usr/local/bin/nvm state=link
+      - name: Set permissions on the opt directory
+        file: path=/opt owner=root group=root recurse=true state=directory
 # we are supposed to update the path to export PATH=./node_modules/.bin:$PATH but I'm not exactly sure what the best way to do that is yet
 
 - name: Jetbrains IntelliJ IDEA
