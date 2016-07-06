@@ -160,8 +160,8 @@
         command: /usr/local/bin/npm install -g npm@latest
       - name: Install Yeoman
         npm: name=yo global=yes state=latest
-      - name: Soft-link Yeoman
-        file: src=/opt/node-{{ node_version }}-linux-x64/bin/yo path=/usr/local/bin/yo state=link
+#     - name: Soft-link Yeoman
+#       file: src=/opt/node-{{ node_version }}-linux-x64/bin/yo path=/usr/local/bin/yo state=link
       - name: Install Bower 
         npm: name=bower global=yes state=latest
       - name: Soft-link Bower
