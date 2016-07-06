@@ -174,8 +174,8 @@
         npm: name=gulp-cli global=yes
       - name: Soft-link Gulp
         file: src=/opt/node-{{ node_version }}-linux-x64/bin/gulp path=/usr/local/bin/gulp state=link
-      - name: Install JHipster 
-        npm: name=generator-jhipster global=yes
+#     - name: Install JHipster 
+#       npm: name=generator-jhipster global=yes
       - name: Install nvm
         npm: name=nvm global=yes
       - name: Soft-link nvm
