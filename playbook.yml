@@ -145,7 +145,7 @@
   become: False
   vars:
     idea_version: 2016.2
-    idea_build: 2016.2
+    idea_build: 162.1121.32
   tasks:
       - name: Create Software directory
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
@@ -196,7 +196,7 @@
   become: False
   vars:
     webstorm_version: 2016.2
-    webstorm_build: 2016.2
+    webstorm_build: 145.1616.9
   tasks:
       - name: Create Software directory
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
