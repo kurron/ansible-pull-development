@@ -4,99 +4,70 @@
   hosts: all
   gather_facts: True
   tasks:
-    - name: create groups based on distribution
-      group_by: key={{ ansible_distribution }}
+    - group_by: key={{ ansible_distribution }}
 
 - name: Install Version Control Systems
   hosts: Ubuntu
   become: True
   tasks:
-    - name: Install Git
-      apt: name=git state=latest update_cache=true cache_valid_time=600
-    - name: Install Subversion
-      apt: name=subversion state=latest update_cache=true cache_valid_time=600
-    - name: Install Mercurial
-      apt: name=mercurial state=latest update_cache=true cache_valid_time=600
-    - name: Install XFS Tools
-      apt: name=xfsprogs state=latest update_cache=true cache_valid_time=600
+    - apt: name=git state=latest update_cache=true cache_valid_time=600
+    - apt: name=subversion state=latest update_cache=true cache_valid_time=600
+    - apt: name=mercurial state=latest update_cache=true cache_valid_time=600
+    - apt: name=xfsprogs state=latest update_cache=true cache_valid_time=600
 
 - name: Install Utilities
   hosts: Ubuntu
   become: True
   tasks:
-    - name: Install sshpass for some of the Docker scripting
-      apt: name=sshpass state=latest update_cache=true cache_valid_time=600
+    - apt: name=sshpass state=latest update_cache=true cache_valid_time=600
 
 - name: Install JDK
   hosts: Ubuntu
   become: True
   vars:
-    java_version: jdk1.8.0_91
-    java_path: 8u91-b14/jdk-8u91
+    java_version: jdk1.8.0_101
+    java_path: 8u101-b13/jdk-8u101
   tasks:
-    - name: Download Java 8 JDK
-      command: wget --quiet --output-document=/root/jdk-8-{{ java_version }}.tar.gz --no-check-certificate --no-cookies --header "Cookie:oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/{{ java_path }}-linux-x64.tar.gz
-    - name: Create destination directory
-      file: path=/usr/lib/jvm owner=root group=root state=directory mode=755
-    - name: unpack the archive
-      unarchive: src=/root/jdk-8-{{ java_version }}.tar.gz dest=/usr/lib/jvm copy=no owner=root group=root mode=755 creates=/usr/lib/jvm/{{ java_version }}/COPYRIGHT
-    - name: soft-link the JDK to a normalized location
-      file: src=/usr/lib/jvm/{{ java_version }} dest=/usr/lib/jvm/oracle-jdk-8 owner=root group=root state=link
-    - name: Export JDK_HOME
-      lineinfile: dest=/etc/environment line='JDK_HOME=/usr/lib/jvm/oracle-jdk-8'
-    - name: Export JAVA_HOME
-      lineinfile: dest=/etc/environment line='JAVA_HOME=/usr/lib/jvm/oracle-jdk-8'
-    - name: Export JAVA_CMD
-      lineinfile: dest=/etc/environment line='JAVA_CMD=/usr/lib/jvm/oracle-jdk-8/bin/java'
+    - command: wget --quiet --output-document=/root/jdk-8-{{ java_version }}.tar.gz --no-check-certificate --no-cookies --header "Cookie:oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/{{ java_path }}-linux-x64.tar.gz
+    - file: path=/usr/lib/jvm owner=root group=root state=directory mode=755
+    - unarchive: src=/root/jdk-8-{{ java_version }}.tar.gz dest=/usr/lib/jvm copy=no owner=root group=root mode=755 creates=/usr/lib/jvm/{{ java_version }}/COPYRIGHT
+    - file: src=/usr/lib/jvm/{{ java_version }} dest=/usr/lib/jvm/oracle-jdk-8 owner=root group=root state=link
+    - lineinfile: dest=/etc/environment line='JDK_HOME=/usr/lib/jvm/oracle-jdk-8'
+    - lineinfile: dest=/etc/environment line='JAVA_HOME=/usr/lib/jvm/oracle-jdk-8'
+    - lineinfile: dest=/etc/environment line='JAVA_CMD=/usr/lib/jvm/oracle-jdk-8/bin/java'
 
 - name: Install Open JDK
-  hosts: Ubuntu
+  hosts: nobody
   become: True
   vars:
     java_path: zulu8.13.0.5-jdk8.0.72-linux_x64
   tasks:
-    - name: Download Java 8 Open JDK
-      command: wget --quiet --output-document=/root/open-jdk-8.tar.gz http://cdn.azul.com/zulu/bin/zulu8.13.0.5-jdk8.0.72-linux_x64.tar.gz
-    - name: Create destination directory
-      file: path=/usr/lib/jvm owner=root group=root state=directory mode=755
-    - name: unpack the archive
-      unarchive: src=/root/open-jdk-8.tar.gz dest=/usr/lib/jvm copy=no owner=root group=root mode=755 creates=/usr/lib/jvm/{{ java_path }}/LICENSE
-    - name: soft-link the JDK to a normalized location
-      file: src=/usr/lib/jvm/{{ java_path }} dest=/usr/lib/jvm/open-jdk-8 owner=root group=root state=link
-#   - name: Export JDK_HOME
-#     lineinfile: dest=/etc/environment line='JDK_HOME=/usr/lib/jvm/oracle-jdk-8'
-#   - name: Export JAVA_HOME
-#     lineinfile: dest=/etc/environment line='JAVA_HOME=/usr/lib/jvm/oracle-jdk-8'
-#   - name: Export JAVA_CMD
-#     lineinfile: dest=/etc/environment line='JAVA_CMD=/usr/lib/jvm/oracle-jdk-8/bin/java'
+    - command: wget --quiet --output-document=/root/open-jdk-8.tar.gz http://cdn.azul.com/zulu/bin/zulu8.13.0.5-jdk8.0.72-linux_x64.tar.gz
+    - file: path=/usr/lib/jvm owner=root group=root state=directory mode=755
+    - unarchive: src=/root/open-jdk-8.tar.gz dest=/usr/lib/jvm copy=no owner=root group=root mode=755 creates=/usr/lib/jvm/{{ java_path }}/LICENSE
+    - file: src=/usr/lib/jvm/{{ java_path }} dest=/usr/lib/jvm/open-jdk-8 owner=root group=root state=link
+#   - lineinfile: dest=/etc/environment line='JDK_HOME=/usr/lib/jvm/oracle-jdk-8'
+#   - lineinfile: dest=/etc/environment line='JAVA_HOME=/usr/lib/jvm/oracle-jdk-8'
+#   - lineinfile: dest=/etc/environment line='JAVA_CMD=/usr/lib/jvm/oracle-jdk-8/bin/java'
 
 - name: Install The Software Development Kit Manager
   hosts: Ubuntu
   become: True
   tasks:
-    - name: Install cURL
-      apt: name=curl state=latest
-    - name: Copy GVM installation script to a safe place
-      copy: src=scripts/install-gvm.sh dest=/tmp/install-gvm.sh owner=vagrant group=vagrant mode=755 backup=no
-    - name: Install GVM
-      shell: sudo --user vagrant --set-home --non-interactive --login /tmp/install-gvm.sh --
-    - name: Create destination director
-      file: path=/home/vagrant/.gvm/etc owner=vagrant group=vagrant state=directory mode=755
-    - name: Copy GVM configuration file
-      copy: src=files/gvm.config dest=/home/vagrant/.gvm/etc/config owner=vagrant group=vagrant mode=644 backup=no
-    - name: Set permissions on the home directory
-      file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
+    - apt: name=curl state=latest
+    - copy: src=scripts/install-gvm.sh dest=/tmp/install-gvm.sh owner=vagrant group=vagrant mode=755 backup=no
+    - shell: sudo --user vagrant --set-home --non-interactive --login /tmp/install-gvm.sh --
+    - file: path=/home/vagrant/.gvm/etc owner=vagrant group=vagrant state=directory mode=755
+    - copy: src=files/gvm.config dest=/home/vagrant/.gvm/etc/config owner=vagrant group=vagrant mode=644 backup=no
+    - file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
 - name: Install Clojure
   hosts: Ubuntu
   become: False
   tasks:
-      - name: Create bin directory
-        file: path=/home/vagrant/bin owner=vagrant group=vagrant state=directory mode=755
-      - name: Install Leiningen
-        get_url: url=https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein dest=/home/vagrant/bin/lein mode=0744
-      - name: Set permissions on the home directory
-        file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
+      - file: path=/home/vagrant/bin owner=vagrant group=vagrant state=directory mode=755
+      - get_url: url=https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein dest=/home/vagrant/bin/lein mode=0744
+      - file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
 - name: Node
   hosts: Ubuntu
@@ -104,287 +75,180 @@
   vars:
     node_version: v4.4.6
   tasks:
-      - name: Download Node
-        get_url: url=http://nodejs.org/dist/{{ node_version }}/node-{{ node_version }}-linux-x64.tar.gz dest=/root/node-{{ node_version }}.tar.gz mode=444
-      - name: Unpack Node
-        unarchive: src=/root/node-{{ node_version }}.tar.gz dest=/opt copy=no owner=root group=root creates=/opt/node-{{ node_version }}-linux-x64/LICENSE
-      - name: Soft-link Node
-        file: src=/opt/node-{{ node_version }}-linux-x64/bin/node path=/usr/local/bin/node state=link
-      - name: Soft-link NPM
-        file: src=/opt/node-{{ node_version }}-linux-x64/bin/npm path=/usr/local/bin/npm state=link
-      - name: Update npm
-        command: /usr/local/bin/npm install -g npm@latest
-      - name: Install Yeoman
-        npm: name=yo global=yes state=latest
-#     - name: Soft-link Yeoman
-#       file: src=/opt/node-{{ node_version }}-linux-x64/bin/yo path=/usr/local/bin/yo state=link
-      - name: Install Bower 
-        npm: name=bower global=yes state=latest
-#     - name: Soft-link Bower
-#       file: src=/opt/node-{{ node_version }}-linux-x64/bin/bower path=/usr/local/bin/bower state=link
-      - name: Install Grunt 
-        npm: name=grunt-cli global=yes state=latest
-#     - name: Soft-link Grunt
-#       file: src=/opt/node-{{ node_version }}-linux-x64/bin/grunt path=/usr/local/bin/grunt state=link
-      - name: Install Gulp
-        npm: name=gulp-cli global=yes state=latest
-#     - name: Soft-link Gulp
-#       file: src=/opt/node-{{ node_version }}-linux-x64/bin/gulp path=/usr/local/bin/gulp state=link
-      - name: Install JHipster
-        npm: name=generator-jhipster global=yes state=latest
-      - name: Install nvm
-        npm: name=nvm global=yes state=latest
-#     - name: Soft-link nvm
-#       file: src=/opt/node-{{ node_version }}-linux-x64/bin/nvm path=/usr/local/bin/nvm state=link
-      - name: Set permissions on the opt directory
-        file: path=/opt owner=root group=root recurse=true state=directory
+      - get_url: url=http://nodejs.org/dist/{{ node_version }}/node-{{ node_version }}-linux-x64.tar.gz dest=/root/node-{{ node_version }}.tar.gz mode=444
+      - unarchive: src=/root/node-{{ node_version }}.tar.gz dest=/opt copy=no owner=root group=root creates=/opt/node-{{ node_version }}-linux-x64/LICENSE
+      - file: src=/opt/node-{{ node_version }}-linux-x64/bin/node path=/usr/local/bin/node state=link
+      - file: src=/opt/node-{{ node_version }}-linux-x64/bin/npm path=/usr/local/bin/npm state=link
+      - command: /usr/local/bin/npm install -g npm@latest
+      - npm: name=yo global=yes state=latest
+#     - file: src=/opt/node-{{ node_version }}-linux-x64/bin/yo path=/usr/local/bin/yo state=link
+      - npm: name=bower global=yes state=latest
+#     - file: src=/opt/node-{{ node_version }}-linux-x64/bin/bower path=/usr/local/bin/bower state=link
+      - npm: name=grunt-cli global=yes state=latest
+#     - file: src=/opt/node-{{ node_version }}-linux-x64/bin/grunt path=/usr/local/bin/grunt state=link
+      - npm: name=gulp-cli global=yes state=latest
+#     - file: src=/opt/node-{{ node_version }}-linux-x64/bin/gulp path=/usr/local/bin/gulp state=link
+      - npm: name=generator-jhipster global=yes state=latest
+      - npm: name=nvm global=yes state=latest
+#     - file: src=/opt/node-{{ node_version }}-linux-x64/bin/nvm path=/usr/local/bin/nvm state=link
+      - file: path=/opt owner=root group=root recurse=true state=directory
 # we are supposed to update the path to export PATH=./node_modules/.bin:$PATH but I'm not exactly sure what the best way to do that is yet
 
 - name: Jetbrains IntelliJ IDEA
-  hosts: Ubuntu
+  hosts: nobody
   become: False
   vars:
     idea_version: 2016.2
     idea_build: 162.1121.32
   tasks:
-      - name: Create Software directory
-        file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
-      - name: Create Downloads directory
-        file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
-      - name: Download IntelliJ IDEA
-        get_url: url=http://download.jetbrains.com/idea/ideaIU-{{ idea_version }}.tar.gz dest=/home/vagrant/Downloads/idea-{{ idea_version }}.tar.gz mode=444
-      - name: Unpack IntelliJ IDEA
-        unarchive: src=/home/vagrant/Downloads/idea-{{ idea_version }}.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/idea-IU-{{ idea_build }}/build.txt
-      - name: Soft-link IntelliJ
-        file: src=/home/vagrant/Software/idea-IU-{{ idea_build }} path=/home/vagrant/Software/idea state=link
-      - name: Create Desktop directory
-        file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
-      - name: Copy desktop IntelliJ file
-        copy: src=files/InjelliJ.desktop dest=/home/vagrant/Desktop/InjelliJ.desktop owner=vagrant group=vagrant backup=no mode=755
-      - name: Export IDEA_JDK
-        lineinfile: dest=/etc/environment line='IDEA_JDK=/usr/lib/jvm/oracle-jdk-8'
-      - name: Set permissions on the home directory
-        file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
+      - file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
+      - file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
+      - get_url: url=http://download.jetbrains.com/idea/ideaIU-{{ idea_version }}.tar.gz dest=/home/vagrant/Downloads/idea-{{ idea_version }}.tar.gz mode=444
+      - unarchive: src=/home/vagrant/Downloads/idea-{{ idea_version }}.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/idea-IU-{{ idea_build }}/build.txt
+      - file: src=/home/vagrant/Software/idea-IU-{{ idea_build }} path=/home/vagrant/Software/idea state=link
+      - file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
+      - copy: src=files/InjelliJ.desktop dest=/home/vagrant/Desktop/InjelliJ.desktop owner=vagrant group=vagrant backup=no mode=755
+      - lineinfile: dest=/etc/environment line='IDEA_JDK=/usr/lib/jvm/oracle-jdk-8'
+      - file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
 - name: Jetbrain's PyCharm IDE
-  hosts: Ubuntu
+  hosts: nobody
   become: False
   vars:
     pycharm_version: 2016.1.4
   tasks:
-      - name: Create Software directory
-        file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
-      - name: Create Downloads directory
-        file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
-      - name: Download PyCharm
-        get_url: url=http://download.jetbrains.com/python/pycharm-professional-{{ pycharm_version }}.tar.gz dest=/home/vagrant/Downloads/pycharm-{{ pycharm_version }}.tar.gz mode=444
-      - name: Unpack PyCharm
-        unarchive: src=/home/vagrant/Downloads/pycharm-{{ pycharm_version }}.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/pycharm-{{ pycharm_version }}/build.txt
-      - name: Soft-link PyCharm
-        file: src=/home/vagrant/Software/pycharm-{{ pycharm_version }} path=/home/vagrant/Software/pycharm state=link
-      - name: Create Desktop directory
-        file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
-      - name: Copy desktop PyCharm file
-        copy: src=files/PyCharm.desktop dest=/home/vagrant/Desktop/PyCharm.desktop owner=vagrant group=vagrant backup=no mode=755
-      - name: Export PYCHARM_JDK
-        lineinfile: dest=/etc/environment line='PYCHARM_JDK=/usr/lib/jvm/oracle-jdk-8'
-      - name: Set permissions on the home directory
-        file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
+      - file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
+      - file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
+      - get_url: url=http://download.jetbrains.com/python/pycharm-professional-{{ pycharm_version }}.tar.gz dest=/home/vagrant/Downloads/pycharm-{{ pycharm_version }}.tar.gz mode=444
+      - unarchive: src=/home/vagrant/Downloads/pycharm-{{ pycharm_version }}.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/pycharm-{{ pycharm_version }}/build.txt
+      - file: src=/home/vagrant/Software/pycharm-{{ pycharm_version }} path=/home/vagrant/Software/pycharm state=link
+      - file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
+      - copy: src=files/PyCharm.desktop dest=/home/vagrant/Desktop/PyCharm.desktop owner=vagrant group=vagrant backup=no mode=755
+      - lineinfile: dest=/etc/environment line='PYCHARM_JDK=/usr/lib/jvm/oracle-jdk-8'
+      - file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
 - name: Jetbrain's WebStorm IDE
-  hosts: Ubuntu
+  hosts: nobody
   become: False
   vars:
     webstorm_version: 2016.2
     webstorm_build: 162.1121.31
   tasks:
-      - name: Create Software directory
-        file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
-      - name: Create Downloads directory
-        file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
-      - name: Download WebStorm
-        get_url: url=http://download.jetbrains.com/webstorm/WebStorm-{{ webstorm_version }}.tar.gz dest=/home/vagrant/Downloads/webstorm-{{ webstorm_version }}.tar.gz mode=444
-      - name: Unpack WebStorm
-        unarchive: src=/home/vagrant/Downloads/webstorm-{{ webstorm_version }}.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/WebStorm-{{ webstorm_build }}/build.txt
-      - name: Soft-link WebStorm
-        file: src=/home/vagrant/Software/WebStorm-{{ webstorm_build }} path=/home/vagrant/Software/webstorm state=link
-      - name: Create Desktop directory
-        file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
-      - name: Copy desktop WebStorm file
-        copy: src=files/WebStorm.desktop dest=/home/vagrant/Desktop/WebStorm.desktop owner=vagrant group=vagrant backup=no mode=755
-      - name: Export WEBIDE_JDK
-        lineinfile: dest=/etc/environment line='WEBIDE_JDK=/usr/lib/jvm/oracle-jdk-8'
-      - name: Set permissions on the home directory
-        file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
+      - file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
+      - file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
+      - get_url: url=http://download.jetbrains.com/webstorm/WebStorm-{{ webstorm_version }}.tar.gz dest=/home/vagrant/Downloads/webstorm-{{ webstorm_version }}.tar.gz mode=444
+      - unarchive: src=/home/vagrant/Downloads/webstorm-{{ webstorm_version }}.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/WebStorm-{{ webstorm_build }}/build.txt
+      - file: src=/home/vagrant/Software/WebStorm-{{ webstorm_build }} path=/home/vagrant/Software/webstorm state=link
+      - file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
+      - copy: src=files/WebStorm.desktop dest=/home/vagrant/Desktop/WebStorm.desktop owner=vagrant group=vagrant backup=no mode=755
+      - lineinfile: dest=/etc/environment line='WEBIDE_JDK=/usr/lib/jvm/oracle-jdk-8'
+      - file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
 - name: Jetbrains DataGrip IDE
-  hosts: Ubuntu
+  hosts: nobody
   become: False
   vars:
     dg_version: 2016.1.1
   tasks:
-      - name: Create Software directory
-        file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
-      - name: Create Downloads directory
-        file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
-      - name: Download DataGrip
-        get_url: url=https://download.jetbrains.com/datagrip/datagrip-{{ dg_version }}.tar.gz dest=/home/vagrant/Downloads/datagrip-{{ dg_version }}.tar.gz mode=444
-      - name: Unpack DataGrip
-        unarchive: src=/home/vagrant/Downloads/datagrip-{{ dg_version }}.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/DataGrip-{{ dg_version }}/build.txt
-      - name: Soft-link DataGrip
-        file: src=/home/vagrant/Software/DataGrip-{{ dg_version }} path=/home/vagrant/Software/datagrip state=link
-      - name: Create Desktop directory
-        file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
-      - name: Copy desktop DataGrip file
-        copy: src=files/DataGrip.desktop dest=/home/vagrant/Desktop/DataGrip.desktop owner=vagrant group=vagrant backup=no mode=755
-      - name: Export DataGrip
-        lineinfile: dest=/etc/environment line='DATAGRIP_JDK=/usr/lib/jvm/oracle-jdk-8'
-      - name: Set permissions on the home directory
-        file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
-
+      - file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
+      - file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
+      - get_url: url=https://download.jetbrains.com/datagrip/datagrip-{{ dg_version }}.tar.gz dest=/home/vagrant/Downloads/datagrip-{{ dg_version }}.tar.gz mode=444
+      - unarchive: src=/home/vagrant/Downloads/datagrip-{{ dg_version }}.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/DataGrip-{{ dg_version }}/build.txt
+      - file: src=/home/vagrant/Software/DataGrip-{{ dg_version }} path=/home/vagrant/Software/datagrip state=link
+      - file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
+      - copy: src=files/DataGrip.desktop dest=/home/vagrant/Desktop/DataGrip.desktop owner=vagrant group=vagrant backup=no mode=755
+      - lineinfile: dest=/etc/environment line='DATAGRIP_JDK=/usr/lib/jvm/oracle-jdk-8'
+      - file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
 - name: MySQL Tools
   hosts: Ubuntu
   become: True
   tasks:
-      - name: Install MySQL client
-        apt: name=mysql-client state=latest
-      - name: Install MySQL Workbench
-        apt: name=mysql-workbench state=latest
+      - apt: name=mysql-client state=latest
+      - apt: name=mysql-workbench state=latest
 
 - name: Create Source Folders
   hosts: Ubuntu
   become: False
   tasks:
-      - name: Create GitHub directory
-        file: path=/home/vagrant/GitHub owner=vagrant group=vagrant state=directory mode=755
-      - name: Create Bitbucket directory
-        file: path=/home/vagrant/Bitbucket owner=vagrant group=vagrant state=directory mode=755
-      - name: Create .lazybones directory
-        file: path=/home/vagrant/.lazybones owner=vagrant group=vagrant state=directory mode=755
-      - name: Copy lazybones configurations file
-        copy: src=files/config.groovy dest=/home/vagrant/.lazybones/config.groovy owner=vagrant group=vagrant backup=no mode=744
+      - file: path=/home/vagrant/GitHub owner=vagrant group=vagrant state=directory mode=755
+      - file: path=/home/vagrant/Bitbucket owner=vagrant group=vagrant state=directory mode=755
+      - file: path=/home/vagrant/.lazybones owner=vagrant group=vagrant state=directory mode=755
+      - copy: src=files/config.groovy dest=/home/vagrant/.lazybones/config.groovy owner=vagrant group=vagrant backup=no mode=744
 
 - name: Install Docker Container Launchers
-  hosts: Ubuntu
+  hosts: Nobody
   become: False
   tasks:
-      - name: Create GitHub directory
-        file: path=/home/vagrant/GitHub owner=vagrant group=vagrant state=directory mode=755
-      - name: Create Desktop directory
-        file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
-      - name: Create bin directory
-        file: path=/home/vagrant/bin owner=vagrant group=vagrant state=directory mode=755
+      - file: path=/home/vagrant/GitHub owner=vagrant group=vagrant state=directory mode=755
+      - file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
+      - file: path=/home/vagrant/bin owner=vagrant group=vagrant state=directory mode=755
 
-#     - name: Checkout IntelliJ Container
-#       git: repo=https://github.com/kurron/docker-intellij.git dest=/home/vagrant/GitHub/docker-intellij
-#     - name: Copy desktop IntelliJ file
-#       copy: src=files/IntelliJ-Docker.desktop dest=/home/vagrant/Desktop/IntelliJ-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+#     - git: repo=https://github.com/kurron/docker-intellij.git dest=/home/vagrant/GitHub/docker-intellij
+#     - copy: src=files/IntelliJ-Docker.desktop dest=/home/vagrant/Desktop/IntelliJ-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
-#     - name: Checkout PyCharm Container
-#       git: repo=https://github.com/kurron/docker-pycharm.git dest=/home/vagrant/GitHub/docker-pycharm
-#     - name: Copy desktop PyCharm file
-#       copy: src=files/PyCharm-Docker.desktop dest=/home/vagrant/Desktop/PyCharm-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+#     - git: repo=https://github.com/kurron/docker-pycharm.git dest=/home/vagrant/GitHub/docker-pycharm
+#     - copy: src=files/PyCharm-Docker.desktop dest=/home/vagrant/Desktop/PyCharm-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
-#     - name: Checkout WebStorm Container
-#       git: repo=https://github.com/kurron/docker-webstorm.git dest=/home/vagrant/GitHub/docker-webstorm
-#     - name: Copy desktop WebStorm file
-#       copy: src=files/WebStorm-Docker.desktop dest=/home/vagrant/Desktop/WebStorm-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+#     - git: repo=https://github.com/kurron/docker-webstorm.git dest=/home/vagrant/GitHub/docker-webstorm
+#     - copy: src=files/WebStorm-Docker.desktop dest=/home/vagrant/Desktop/WebStorm-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
-      - name: Checkout PhpStorm Container
-        git: repo=https://github.com/kurron/docker-php-storm.git dest=/home/vagrant/GitHub/docker-php-storm
-      - name: Copy desktop PhpStorm file
-        copy: src=files/PhpStorm-Docker.desktop dest=/home/vagrant/Desktop/PhpStorm-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+      - git: repo=https://github.com/kurron/docker-php-storm.git dest=/home/vagrant/GitHub/docker-php-storm
+      - copy: src=files/PhpStorm-Docker.desktop dest=/home/vagrant/Desktop/PhpStorm-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
-      - name: Checkout RubyMine Container
-        git: repo=https://github.com/kurron/docker-rubymine.git dest=/home/vagrant/GitHub/docker-rubymine
-      - name: Copy desktop RubyMine file
-        copy: src=files/RubyMine-Docker.desktop dest=/home/vagrant/Desktop/RubyMine-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+      - git: repo=https://github.com/kurron/docker-rubymine.git dest=/home/vagrant/GitHub/docker-rubymine
+      - copy: src=files/RubyMine-Docker.desktop dest=/home/vagrant/Desktop/RubyMine-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
-      - name: Checkout CLion Container
-        git: repo=https://github.com/kurron/docker-clion.git dest=/home/vagrant/GitHub/docker-clion
-      - name: Copy desktop CLion file
-        copy: src=files/CLion-Docker.desktop dest=/home/vagrant/Desktop/CLion-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+      - git: repo=https://github.com/kurron/docker-clion.git dest=/home/vagrant/GitHub/docker-clion
+      - copy: src=files/CLion-Docker.desktop dest=/home/vagrant/Desktop/CLion-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
-#     - name: Checkout DataGrip Container
-#       git: repo=https://github.com/kurron/docker-0xdbe.git dest=/home/vagrant/GitHub/docker-0xdbe
-#     - name: Copy desktop DataGrip file
-#       copy: src=files/0xDBE-Docker.desktop dest=/home/vagrant/Desktop/0xDBE-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+#     - git: repo=https://github.com/kurron/docker-0xdbe.git dest=/home/vagrant/GitHub/docker-0xdbe
+#     - copy: src=files/0xDBE-Docker.desktop dest=/home/vagrant/Desktop/0xDBE-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
-      - name: Checkout Charles Container
-        git: repo=https://github.com/kurron/docker-charles-proxy.git dest=/home/vagrant/GitHub/docker-charles-proxy
-      - name: Copy desktop Charles file
-        copy: src=files/Charles-Docker.desktop dest=/home/vagrant/Desktop/Charles-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+      - git: repo=https://github.com/kurron/docker-charles-proxy.git dest=/home/vagrant/GitHub/docker-charles-proxy
+      - copy: src=files/Charles-Docker.desktop dest=/home/vagrant/Desktop/Charles-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
-#     - name: Checkout DbVisualizer Container
-#       git: repo=https://github.com/kurron/docker-dbvisualizer.git dest=/home/vagrant/GitHub/docker-dbvisualizer
-#     - name: Copy desktop DbVisualizer file
-#       copy: src=files/Database-Docker.desktop dest=/home/vagrant/Desktop/Database-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+#     - git: repo=https://github.com/kurron/docker-dbvisualizer.git dest=/home/vagrant/GitHub/docker-dbvisualizer
+#     - copy: src=files/Database-Docker.desktop dest=/home/vagrant/Desktop/Database-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
-      - name: Checkout logFaces Container
-        git: repo=https://github.com/kurron/docker-logfaces-client.git dest=/home/vagrant/GitHub/docker-logfaces-client
-      - name: Copy desktop logFaces file
-        copy: src=files/logFACES-Docker.desktop dest=/home/vagrant/Desktop/logFACES-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+      - git: repo=https://github.com/kurron/docker-logfaces-client.git dest=/home/vagrant/GitHub/docker-logfaces-client
+      - copy: src=files/logFACES-Docker.desktop dest=/home/vagrant/Desktop/logFACES-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
-      - name: Checkout Emacs Container
-        git: repo=https://github.com/kurron/docker-emacs.git dest=/home/vagrant/GitHub/docker-emacs
-      - name: Copy desktop Emacs file
-        copy: src=files/Emacs-Docker.desktop dest=/home/vagrant/Desktop/Emacs-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+      - git: repo=https://github.com/kurron/docker-emacs.git dest=/home/vagrant/GitHub/docker-emacs
+      - copy: src=files/Emacs-Docker.desktop dest=/home/vagrant/Desktop/Emacs-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
-      - name: Checkout JMeter Container
-        git: repo=https://github.com/kurron/docker-jmeter.git dest=/home/vagrant/GitHub/docker-jmeter
-      - name: Copy desktop JMeter file
-        copy: src=files/JMeter-Docker.desktop dest=/home/vagrant/Desktop/JMeter-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+      - git: repo=https://github.com/kurron/docker-jmeter.git dest=/home/vagrant/GitHub/docker-jmeter
+      - copy: src=files/JMeter-Docker.desktop dest=/home/vagrant/Desktop/JMeter-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
-      - name: Checkout Android Studio Container
-        git: repo=https://github.com/kurron/docker-android-studio.git dest=/home/vagrant/GitHub/docker-android-studio
-      - name: Copy desktop Android Studio file
-        copy: src=files/Studio-Docker.desktop dest=/home/vagrant/Desktop/Studio-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+      - git: repo=https://github.com/kurron/docker-android-studio.git dest=/home/vagrant/GitHub/docker-android-studio
+      - copy: src=files/Studio-Docker.desktop dest=/home/vagrant/Desktop/Studio-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
-      - name: Checkout MPS Container
-        git: repo=https://github.com/kurron/docker-mps.git dest=/home/vagrant/GitHub/docker-mps
-      - name: Copy desktop MPS file
-        copy: src=files/MPS-Docker.desktop dest=/home/vagrant/Desktop/MPS-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+      - git: repo=https://github.com/kurron/docker-mps.git dest=/home/vagrant/GitHub/docker-mps
+      - copy: src=files/MPS-Docker.desktop dest=/home/vagrant/Desktop/MPS-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
-      - name: Checkout STS Container
-        git: repo=https://github.com/kurron/docker-sts.git dest=/home/vagrant/GitHub/docker-sts
-      - name: Copy desktop STS file
-        copy: src=files/STS-Docker.desktop dest=/home/vagrant/Desktop/STS-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+      - git: repo=https://github.com/kurron/docker-sts.git dest=/home/vagrant/GitHub/docker-sts
+      - copy: src=files/STS-Docker.desktop dest=/home/vagrant/Desktop/STS-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
-#     - name: Checkout Ant Container
-#       git: repo=https://github.com/kurron/docker-ant.git dest=/home/vagrant/GitHub/docker-ant
-#     - name: Soft link Ant Container
-#       file: src=/home/vagrant/GitHub/docker-ant/ant.sh path=/home/vagrant/bin/ant state=link
+#     - git: repo=https://github.com/kurron/docker-ant.git dest=/home/vagrant/GitHub/docker-ant
+#     - file: src=/home/vagrant/GitHub/docker-ant/ant.sh path=/home/vagrant/bin/ant state=link
 
-#     - name: Checkout Maven Container
-#       git: repo=https://github.com/kurron/docker-maven.git dest=/home/vagrant/GitHub/docker-maven
-#     - name: Soft link Maven Container
-#       file: src=/home/vagrant/GitHub/docker-maven/mvn.sh path=/home/vagrant/bin/mvn state=link
+#     - git: repo=https://github.com/kurron/docker-maven.git dest=/home/vagrant/GitHub/docker-maven
+#     - file: src=/home/vagrant/GitHub/docker-maven/mvn.sh path=/home/vagrant/bin/mvn state=link
 
-      - name: Checkout Java Container
-        git: repo=https://github.com/kurron/docker-java-runtime.git dest=/home/vagrant/GitHub/docker-java-runtime
-      - name: Soft link Java Container
-        file: src=/home/vagrant/GitHub/docker-java-runtime/java.sh path=/home/vagrant/bin/jrt state=link
+      - git: repo=https://github.com/kurron/docker-java-runtime.git dest=/home/vagrant/GitHub/docker-java-runtime
+      - file: src=/home/vagrant/GitHub/docker-java-runtime/java.sh path=/home/vagrant/bin/jrt state=link
 
-      - name: Checkout Scala Container
-        git: repo=https://github.com/kurron/docker-scala.git dest=/home/vagrant/GitHub/docker-scala
-      - name: Soft link FSC Command
-        file: src=/home/vagrant/GitHub/docker-scala/fsc.sh path=/home/vagrant/bin/fsc state=link
-      - name: Soft link scalac Command
-        file: src=/home/vagrant/GitHub/docker-scala/scalac.sh path=/home/vagrant/bin/scalac state=link
-      - name: Soft link Scala REPL Command
-        file: src=/home/vagrant/GitHub/docker-scala/scala-repl.sh path=/home/vagrant/bin/scala-repl state=link
-      - name: Soft link Scala Command
-        file: src=/home/vagrant/GitHub/docker-scala/scala.sh path=/home/vagrant/bin/scala state=link
+      - git: repo=https://github.com/kurron/docker-scala.git dest=/home/vagrant/GitHub/docker-scala
+      - file: src=/home/vagrant/GitHub/docker-scala/fsc.sh path=/home/vagrant/bin/fsc state=link
+      - file: src=/home/vagrant/GitHub/docker-scala/scalac.sh path=/home/vagrant/bin/scalac state=link
+      - file: src=/home/vagrant/GitHub/docker-scala/scala-repl.sh path=/home/vagrant/bin/scala-repl state=link
+      - file: src=/home/vagrant/GitHub/docker-scala/scala.sh path=/home/vagrant/bin/scala state=link
 
-      - name: Allow connecting to the X server 
-        lineinfile: dest=/home/vagrant/.bashrc line='/usr/bin/xhost +'
+      - lineinfile: dest=/home/vagrant/.bashrc line='/usr/bin/xhost +'
 
-      - name: Copy image priming file
-        copy: src=scripts/prime-images.sh dest=/home/vagrant/bin/prime-images.sh owner=vagrant group=vagrant backup=no mode=755
+      - copy: src=scripts/prime-images.sh dest=/home/vagrant/bin/prime-images.sh owner=vagrant group=vagrant backup=no mode=755
 
-      - name: Set permissions on the home directory
-        file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
+      - file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
 - name: Install HTTP IE (cURL replacement)
   hosts: Ubuntu
@@ -403,10 +267,8 @@
   hosts: Ubuntu
   become: True
   tasks:
-      - name: Install Apache Benchmark
-        apt: name=apache2-utils state=latest update_cache=true cache_valid_time=600
-      - name: Install httping
-        apt: name=httping state=latest update_cache=true cache_valid_time=600
+      - apt: name=apache2-utils state=latest update_cache=true cache_valid_time=600
+      - apt: name=httping state=latest update_cache=true cache_valid_time=600
 
 - name: Add host names for Dockered services
   hosts: Ubuntu
