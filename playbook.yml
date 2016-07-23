@@ -193,14 +193,14 @@
 #     - git: repo=https://github.com/kurron/docker-webstorm.git dest=/home/vagrant/GitHub/docker-webstorm
 #     - copy: src=files/WebStorm-Docker.desktop dest=/home/vagrant/Desktop/WebStorm-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
-      - git: repo=https://github.com/kurron/docker-php-storm.git dest=/home/vagrant/GitHub/docker-php-storm
-      - copy: src=files/PhpStorm-Docker.desktop dest=/home/vagrant/Desktop/PhpStorm-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+#     - git: repo=https://github.com/kurron/docker-php-storm.git dest=/home/vagrant/GitHub/docker-php-storm
+#     - copy: src=files/PhpStorm-Docker.desktop dest=/home/vagrant/Desktop/PhpStorm-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
-      - git: repo=https://github.com/kurron/docker-rubymine.git dest=/home/vagrant/GitHub/docker-rubymine
-      - copy: src=files/RubyMine-Docker.desktop dest=/home/vagrant/Desktop/RubyMine-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+#     - git: repo=https://github.com/kurron/docker-rubymine.git dest=/home/vagrant/GitHub/docker-rubymine
+#     - copy: src=files/RubyMine-Docker.desktop dest=/home/vagrant/Desktop/RubyMine-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
-      - git: repo=https://github.com/kurron/docker-clion.git dest=/home/vagrant/GitHub/docker-clion
-      - copy: src=files/CLion-Docker.desktop dest=/home/vagrant/Desktop/CLion-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+#     - git: repo=https://github.com/kurron/docker-clion.git dest=/home/vagrant/GitHub/docker-clion
+#     - copy: src=files/CLion-Docker.desktop dest=/home/vagrant/Desktop/CLion-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
 #     - git: repo=https://github.com/kurron/docker-0xdbe.git dest=/home/vagrant/GitHub/docker-0xdbe
 #     - copy: src=files/0xDBE-Docker.desktop dest=/home/vagrant/Desktop/0xDBE-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
@@ -214,20 +214,20 @@
       - git: repo=https://github.com/kurron/docker-logfaces-client.git dest=/home/vagrant/GitHub/docker-logfaces-client
       - copy: src=files/logFACES-Docker.desktop dest=/home/vagrant/Desktop/logFACES-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
-      - git: repo=https://github.com/kurron/docker-emacs.git dest=/home/vagrant/GitHub/docker-emacs
-      - copy: src=files/Emacs-Docker.desktop dest=/home/vagrant/Desktop/Emacs-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+#     - git: repo=https://github.com/kurron/docker-emacs.git dest=/home/vagrant/GitHub/docker-emacs
+#     - copy: src=files/Emacs-Docker.desktop dest=/home/vagrant/Desktop/Emacs-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
       - git: repo=https://github.com/kurron/docker-jmeter.git dest=/home/vagrant/GitHub/docker-jmeter
       - copy: src=files/JMeter-Docker.desktop dest=/home/vagrant/Desktop/JMeter-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
-      - git: repo=https://github.com/kurron/docker-android-studio.git dest=/home/vagrant/GitHub/docker-android-studio
-      - copy: src=files/Studio-Docker.desktop dest=/home/vagrant/Desktop/Studio-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+#     - git: repo=https://github.com/kurron/docker-android-studio.git dest=/home/vagrant/GitHub/docker-android-studio
+#     - copy: src=files/Studio-Docker.desktop dest=/home/vagrant/Desktop/Studio-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
-      - git: repo=https://github.com/kurron/docker-mps.git dest=/home/vagrant/GitHub/docker-mps
-      - copy: src=files/MPS-Docker.desktop dest=/home/vagrant/Desktop/MPS-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+#     - git: repo=https://github.com/kurron/docker-mps.git dest=/home/vagrant/GitHub/docker-mps
+#     - copy: src=files/MPS-Docker.desktop dest=/home/vagrant/Desktop/MPS-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
-      - git: repo=https://github.com/kurron/docker-sts.git dest=/home/vagrant/GitHub/docker-sts
-      - copy: src=files/STS-Docker.desktop dest=/home/vagrant/Desktop/STS-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+#     - git: repo=https://github.com/kurron/docker-sts.git dest=/home/vagrant/GitHub/docker-sts
+#     - copy: src=files/STS-Docker.desktop dest=/home/vagrant/Desktop/STS-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
 #     - git: repo=https://github.com/kurron/docker-ant.git dest=/home/vagrant/GitHub/docker-ant
 #     - file: src=/home/vagrant/GitHub/docker-ant/ant.sh path=/home/vagrant/bin/ant state=link
