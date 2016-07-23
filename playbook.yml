@@ -95,7 +95,7 @@
 # we are supposed to update the path to export PATH=./node_modules/.bin:$PATH but I'm not exactly sure what the best way to do that is yet
 
 - name: Jetbrains IntelliJ IDEA
-  hosts: nobody
+  hosts: Ubuntu
   become: False
   vars:
     idea_version: 2016.2
@@ -112,7 +112,7 @@
       - file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
 - name: Jetbrain's PyCharm IDE
-  hosts: nobody
+  hosts: Ubuntu
   become: False
   vars:
     pycharm_version: 2016.1.4
@@ -128,7 +128,7 @@
       - file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
 - name: Jetbrain's WebStorm IDE
-  hosts: nobody
+  hosts: Ubuntu
   become: False
   vars:
     webstorm_version: 2016.2
@@ -145,7 +145,7 @@
       - file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
 - name: Jetbrains DataGrip IDE
-  hosts: nobody
+  hosts: Ubuntu
   become: False
   vars:
     dg_version: 2016.1.1
@@ -177,7 +177,7 @@
       - copy: src=files/config.groovy dest=/home/vagrant/.lazybones/config.groovy owner=vagrant group=vagrant backup=no mode=744
 
 - name: Install Docker Container Launchers
-  hosts: Nobody
+  hosts: Ubuntu
   become: False
   tasks:
       - file: path=/home/vagrant/GitHub owner=vagrant group=vagrant state=directory mode=755
