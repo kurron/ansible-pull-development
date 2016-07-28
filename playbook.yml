@@ -115,7 +115,7 @@
   hosts: Ubuntu
   become: False
   vars:
-    pycharm_version: 2016.1.4
+    pycharm_version: 2016.2
   tasks:
       - file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
       - file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
