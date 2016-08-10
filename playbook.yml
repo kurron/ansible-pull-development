@@ -98,12 +98,12 @@
   hosts: Ubuntu
   become: False
   vars:
-    idea_version: 2016.2
-    idea_build: 162.1121.32
+    idea_version: 2016.2.1
+    idea_build: 162.1447.26
   tasks:
       - file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
       - file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
-      - get_url: url=http://download.jetbrains.com/idea/ideaIU-{{ idea_version }}.tar.gz dest=/home/vagrant/Downloads/idea-{{ idea_version }}.tar.gz mode=444
+      - get_url: url=https://download.jetbrains.com/idea/ideaIU-{{ idea_version }}.tar.gz dest=/home/vagrant/Downloads/idea-{{ idea_version }}.tar.gz mode=444
       - unarchive: src=/home/vagrant/Downloads/idea-{{ idea_version }}.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/idea-IU-{{ idea_build }}/build.txt
       - file: src=/home/vagrant/Software/idea-IU-{{ idea_build }} path=/home/vagrant/Software/idea state=link
       - file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
@@ -119,7 +119,7 @@
   tasks:
       - file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
       - file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
-      - get_url: url=http://download.jetbrains.com/python/pycharm-professional-{{ pycharm_version }}.tar.gz dest=/home/vagrant/Downloads/pycharm-{{ pycharm_version }}.tar.gz mode=444
+      - get_url: url=https://download.jetbrains.com/python/pycharm-professional-{{ pycharm_version }}.tar.gz dest=/home/vagrant/Downloads/pycharm-{{ pycharm_version }}.tar.gz mode=444
       - unarchive: src=/home/vagrant/Downloads/pycharm-{{ pycharm_version }}.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/pycharm-{{ pycharm_version }}/build.txt
       - file: src=/home/vagrant/Software/pycharm-{{ pycharm_version }} path=/home/vagrant/Software/pycharm state=link
       - file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
@@ -131,12 +131,12 @@
   hosts: Ubuntu
   become: False
   vars:
-    webstorm_version: 2016.2
-    webstorm_build: 162.1121.31
+    webstorm_version: 2016.2.1
+    webstorm_build: 162.1447.27.31
   tasks:
       - file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
       - file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
-      - get_url: url=http://download.jetbrains.com/webstorm/WebStorm-{{ webstorm_version }}.tar.gz dest=/home/vagrant/Downloads/webstorm-{{ webstorm_version }}.tar.gz mode=444
+      - get_url: url=https://download.jetbrains.com/webstorm/WebStorm-{{ webstorm_version }}.tar.gz dest=/home/vagrant/Downloads/webstorm-{{ webstorm_version }}.tar.gz mode=444
       - unarchive: src=/home/vagrant/Downloads/webstorm-{{ webstorm_version }}.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/WebStorm-{{ webstorm_build }}/build.txt
       - file: src=/home/vagrant/Software/WebStorm-{{ webstorm_build }} path=/home/vagrant/Software/webstorm state=link
       - file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
@@ -148,7 +148,7 @@
   hosts: Ubuntu
   become: False
   vars:
-    dg_version: 2016.1.1
+    dg_version: 2016.2
   tasks:
       - file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
       - file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
