@@ -132,7 +132,7 @@
   become: False
   vars:
     webstorm_version: 2016.2.1
-    webstorm_build: 162.1447.27.31
+    webstorm_build: 162.1447.27
   tasks:
       - file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
       - file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
