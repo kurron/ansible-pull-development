@@ -98,8 +98,8 @@
   hosts: Ubuntu
   become: False
   vars:
-    idea_version: 2016.2.1
-    idea_build: 162.1447.26
+    idea_version: 2016.2.2
+    idea_build: 162.1628.40
   tasks:
       - file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
       - file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
