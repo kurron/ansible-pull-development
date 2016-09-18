@@ -73,7 +73,7 @@
   hosts: Ubuntu
   become: True
   vars:
-    node_version: v4.4.6
+    node_version: v4.5.0
   tasks:
       - get_url: url=http://nodejs.org/dist/{{ node_version }}/node-{{ node_version }}-linux-x64.tar.gz dest=/root/node-{{ node_version }}.tar.gz mode=444
       - unarchive: src=/root/node-{{ node_version }}.tar.gz dest=/opt copy=no owner=root group=root creates=/opt/node-{{ node_version }}-linux-x64/LICENSE
@@ -98,8 +98,8 @@
   hosts: Ubuntu
   become: False
   vars:
-    idea_version: 2016.2.3
-    idea_build: 162.1812.17
+    idea_version: 2016.2.4
+    idea_build: 162.2031.8
   tasks:
       - file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
       - file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
@@ -115,7 +115,7 @@
   hosts: Ubuntu
   become: False
   vars:
-    pycharm_version: 2016.2
+    pycharm_version: 2016.2.3
   tasks:
       - file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
       - file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
@@ -131,8 +131,8 @@
   hosts: Ubuntu
   become: False
   vars:
-    webstorm_version: 2016.2.1
-    webstorm_build: 162.1447.27
+    webstorm_version: 2016.2.3
+    webstorm_build: 162.1812.21
   tasks:
       - file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
       - file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
@@ -148,7 +148,7 @@
   hosts: Ubuntu
   become: False
   vars:
-    dg_version: 2016.2
+    dg_version: 2016.2.3
   tasks:
       - file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
       - file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
