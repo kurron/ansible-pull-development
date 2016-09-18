@@ -99,7 +99,7 @@
   become: False
   vars:
     idea_version: 2016.2.4
-    idea_build: 162.2031.8
+    idea_build: 162.2032.8
   tasks:
       - file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
       - file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
