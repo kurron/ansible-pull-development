@@ -98,7 +98,7 @@
       - file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
 - name: Jetbrain's PyCharm IDE
-  hosts: Ubuntu
+  hosts: all
   become: False
   vars:
     pycharm_version: 2016.2.3
@@ -111,10 +111,11 @@
       - file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
       - copy: src=files/PyCharm.desktop dest=/home/vagrant/Desktop/PyCharm.desktop owner=vagrant group=vagrant backup=no mode=755
       - lineinfile: dest=/etc/environment line='PYCHARM_JDK=/usr/lib/jvm/oracle-jdk-8'
+      - copy: src=scripts/pycharm-environment.sh dest=/etc/profile.d/pycharm-environment.sh owner=root group=root mode=755 backup=no
       - file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
 - name: Jetbrain's WebStorm IDE
-  hosts: Ubuntu
+  hosts: all
   become: False
   vars:
     webstorm_version: 2016.2.3
@@ -128,10 +129,11 @@
       - file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
       - copy: src=files/WebStorm.desktop dest=/home/vagrant/Desktop/WebStorm.desktop owner=vagrant group=vagrant backup=no mode=755
       - lineinfile: dest=/etc/environment line='WEBIDE_JDK=/usr/lib/jvm/oracle-jdk-8'
+      - copy: src=scripts/webstorm-environment.sh dest=/etc/profile.d/webstorm-environment.sh owner=root group=root mode=755 backup=no
       - file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
 - name: Jetbrains DataGrip IDE
-  hosts: Ubuntu
+  hosts: all
   become: False
   vars:
     dg_version: 2016.2.3
@@ -144,6 +146,7 @@
       - file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
       - copy: src=files/DataGrip.desktop dest=/home/vagrant/Desktop/DataGrip.desktop owner=vagrant group=vagrant backup=no mode=755
       - lineinfile: dest=/etc/environment line='DATAGRIP_JDK=/usr/lib/jvm/oracle-jdk-8'
+      - copy: src=scripts/datagrip-environment.sh dest=/etc/profile.d/datagrip-environment.sh owner=root group=root mode=755 backup=no
       - file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
 - name: MySQL Tools
@@ -154,7 +157,7 @@
       - apt: name=mysql-workbench state=latest
 
 - name: Create Source Folders
-  hosts: Ubuntu
+  hosts: all
   become: False
   tasks:
       - file: path=/home/vagrant/GitHub owner=vagrant group=vagrant state=directory mode=755
