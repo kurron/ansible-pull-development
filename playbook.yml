@@ -45,7 +45,7 @@
     - copy: src=files/java-environment.sh dest=/etc/profile.d/java-environment.sh owner=root group=root mode=755 backup=no
 
 - name: Install The Software Development Kit Manager
-  hosts: all
+  hosts: Ubuntu
   become: True
   tasks:
     - copy: src=scripts/install-gvm.sh dest=/tmp/install-gvm.sh owner=vagrant group=vagrant mode=755 backup=no
