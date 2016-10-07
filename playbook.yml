@@ -42,7 +42,7 @@
     - lineinfile: dest=/etc/environment line='JDK_HOME=/usr/lib/jvm/oracle-jdk-8'
     - lineinfile: dest=/etc/environment line='JAVA_HOME=/usr/lib/jvm/oracle-jdk-8'
     - lineinfile: dest=/etc/environment line='JAVA_CMD=/usr/lib/jvm/oracle-jdk-8/bin/java'
-    - copy: src=files/java-environment.sh dest=/etc/profile.d/java-environment.sh owner=root group=root mode=755 backup=no
+    - copy: src=scripts/java-environment.sh dest=/etc/profile.d/java-environment.sh owner=root group=root mode=755 backup=no
 
 - name: Install The Software Development Kit Manager
   hosts: Ubuntu
@@ -55,7 +55,7 @@
     - file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
 - name: Node
-  hosts: all
+  hosts: Ubuntu
   become: True
   vars:
     node_version: v4.5.0
@@ -80,7 +80,7 @@
 # we are supposed to update the path to export PATH=./node_modules/.bin:$PATH but I'm not exactly sure what the best way to do that is yet
 
 - name: Jetbrains IntelliJ IDEA
-  hosts: Ubuntu
+  hosts: all
   become: False
   vars:
     idea_version: 2016.2.4
@@ -94,6 +94,7 @@
       - file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
       - copy: src=files/InjelliJ.desktop dest=/home/vagrant/Desktop/InjelliJ.desktop owner=vagrant group=vagrant backup=no mode=755
       - lineinfile: dest=/etc/environment line='IDEA_JDK=/usr/lib/jvm/oracle-jdk-8'
+      - copy: src=scripts/idea-environment.sh dest=/etc/profile.d/idea-environment.sh owner=root group=root mode=755 backup=no
       - file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
 - name: Jetbrain's PyCharm IDE
