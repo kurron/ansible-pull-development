@@ -6,7 +6,7 @@
   tasks:
     - group_by: key={{ ansible_distribution }}
 
-- name: Install Version Control Systems
+- name: Install Ubuntu Packages
   hosts: Ubuntu
   become: True
   tasks:
@@ -14,15 +14,22 @@
     - apt: name=subversion state=latest update_cache=true cache_valid_time=600
     - apt: name=mercurial state=latest update_cache=true cache_valid_time=600
     - apt: name=xfsprogs state=latest update_cache=true cache_valid_time=600
+    - apt: name=sshpass state=latest update_cache=true cache_valid_time=600
+    - apt: name=curl state=latest
 
-- name: Install Utilities
-  hosts: Ubuntu
+- name: Install CentOS Packages
+  hosts: CentOS
   become: True
   tasks:
-    - apt: name=sshpass state=latest update_cache=true cache_valid_time=600
+    - yum: name=git state=latest
+    - yum: name=subversion state=latest
+    - yum: name=mercurial state=latest
+    - yum: name=xfsprogs state=latest
+    - yum: name=sshpass state=latest
+    - yum: name=curl state=latest
 
 - name: Install JDK
-  hosts: Ubuntu
+  hosts: All
   become: True
   vars:
     java_version: jdk1.8.0_101
@@ -32,45 +39,33 @@
     - file: path=/usr/lib/jvm owner=root group=root state=directory mode=755
     - unarchive: src=/root/jdk-8-{{ java_version }}.tar.gz dest=/usr/lib/jvm copy=no owner=root group=root mode=755 creates=/usr/lib/jvm/{{ java_version }}/COPYRIGHT
     - file: src=/usr/lib/jvm/{{ java_version }} dest=/usr/lib/jvm/oracle-jdk-8 owner=root group=root state=link
+
+- name: Set JDK Environment (Ubuntu)
+  hosts: Ubuntu
+  become: True
+  tasks:
     - lineinfile: dest=/etc/environment line='JDK_HOME=/usr/lib/jvm/oracle-jdk-8'
     - lineinfile: dest=/etc/environment line='JAVA_HOME=/usr/lib/jvm/oracle-jdk-8'
     - lineinfile: dest=/etc/environment line='JAVA_CMD=/usr/lib/jvm/oracle-jdk-8/bin/java'
 
-- name: Install Open JDK
-  hosts: nobody
+- name: Set JDK Environment (CentOS)
+  hosts: CentOS
   become: True
-  vars:
-    java_path: zulu8.13.0.5-jdk8.0.72-linux_x64
   tasks:
-    - command: wget --quiet --output-document=/root/open-jdk-8.tar.gz http://cdn.azul.com/zulu/bin/zulu8.13.0.5-jdk8.0.72-linux_x64.tar.gz
-    - file: path=/usr/lib/jvm owner=root group=root state=directory mode=755
-    - unarchive: src=/root/open-jdk-8.tar.gz dest=/usr/lib/jvm copy=no owner=root group=root mode=755 creates=/usr/lib/jvm/{{ java_path }}/LICENSE
-    - file: src=/usr/lib/jvm/{{ java_path }} dest=/usr/lib/jvm/open-jdk-8 owner=root group=root state=link
-#   - lineinfile: dest=/etc/environment line='JDK_HOME=/usr/lib/jvm/oracle-jdk-8'
-#   - lineinfile: dest=/etc/environment line='JAVA_HOME=/usr/lib/jvm/oracle-jdk-8'
-#   - lineinfile: dest=/etc/environment line='JAVA_CMD=/usr/lib/jvm/oracle-jdk-8/bin/java'
+    - copy: src=files/java-environment.sh dest=/etc/profile.d/java-environment.sh owner=root group=root mode=755 backup=no
 
 - name: Install The Software Development Kit Manager
-  hosts: Ubuntu
+  hosts: all
   become: True
   tasks:
-    - apt: name=curl state=latest
     - copy: src=scripts/install-gvm.sh dest=/tmp/install-gvm.sh owner=vagrant group=vagrant mode=755 backup=no
     - shell: sudo --user vagrant --set-home --non-interactive --login /tmp/install-gvm.sh --
     - file: path=/home/vagrant/.gvm/etc owner=vagrant group=vagrant state=directory mode=755
     - copy: src=files/gvm.config dest=/home/vagrant/.gvm/etc/config owner=vagrant group=vagrant mode=644 backup=no
     - file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
-- name: Install Clojure
-  hosts: Ubuntu
-  become: False
-  tasks:
-      - file: path=/home/vagrant/bin owner=vagrant group=vagrant state=directory mode=755
-      - get_url: url=https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein dest=/home/vagrant/bin/lein mode=0744
-      - file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
-
 - name: Node
-  hosts: Ubuntu
+  hosts: all
   become: True
   vars:
     node_version: v4.5.0
