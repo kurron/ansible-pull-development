@@ -29,7 +29,7 @@
     - yum: name=curl state=latest
 
 - name: Install JDK
-  hosts: All
+  hosts: all
   become: True
   vars:
     java_version: jdk1.8.0_101
@@ -39,19 +39,9 @@
     - file: path=/usr/lib/jvm owner=root group=root state=directory mode=755
     - unarchive: src=/root/jdk-8-{{ java_version }}.tar.gz dest=/usr/lib/jvm copy=no owner=root group=root mode=755 creates=/usr/lib/jvm/{{ java_version }}/COPYRIGHT
     - file: src=/usr/lib/jvm/{{ java_version }} dest=/usr/lib/jvm/oracle-jdk-8 owner=root group=root state=link
-
-- name: Set JDK Environment (Ubuntu)
-  hosts: Ubuntu
-  become: True
-  tasks:
     - lineinfile: dest=/etc/environment line='JDK_HOME=/usr/lib/jvm/oracle-jdk-8'
     - lineinfile: dest=/etc/environment line='JAVA_HOME=/usr/lib/jvm/oracle-jdk-8'
     - lineinfile: dest=/etc/environment line='JAVA_CMD=/usr/lib/jvm/oracle-jdk-8/bin/java'
-
-- name: Set JDK Environment (CentOS)
-  hosts: CentOS
-  become: True
-  tasks:
     - copy: src=files/java-environment.sh dest=/etc/profile.d/java-environment.sh owner=root group=root mode=755 backup=no
 
 - name: Install The Software Development Kit Manager
