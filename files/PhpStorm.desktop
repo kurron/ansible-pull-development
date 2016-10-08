@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=PhpStorm
+Comment=PHP IDE
+Exec=/home/vagrant/Software/phpstorm/bin/phpstorm.sh
+Icon=/home/vagrant/Software/phpstorm/bin/webide.png
+Path=
+Terminal=false
+StartupNotify=true

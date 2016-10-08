@@ -192,7 +192,24 @@
       - lineinfile: dest=/etc/environment line='CL_JDK=/usr/lib/jvm/oracle-jdk-8'
       - copy: src=scripts/clion-environment.sh dest=/etc/profile.d/clion-environment.sh owner=root group=root mode=755 backup=no
       - file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
-      
+
+- name: Jetbrains PhpStorm
+  hosts: all
+  become: False
+  vars:
+    version: 2016.2.1
+  tasks:
+      - file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
+      - file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
+      - get_url: url=https://download.jetbrains.com/webide/PhpStorm-{{ version }}.tar.gz dest=/home/vagrant/Downloads/PhpStorm-{{ version }}.tar.gz mode=444
+      - unarchive: src=/home/vagrant/Downloads/PhpStorm-{{ version }}.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/PhpStorm-{{ version }}/build.txt
+      - file: src=/home/vagrant/Software/PhpStorm-{{ version }} path=/home/vagrant/Software/phpstorm state=link
+      - file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
+      - copy: src=files/PhpStorm.desktop dest=/home/vagrant/Desktop/PhpStorm.desktop owner=vagrant group=vagrant backup=no mode=755
+      - lineinfile: dest=/etc/environment line='PHPSTORM_JDK=/usr/lib/jvm/oracle-jdk-8'
+      - copy: src=scripts/phpstorm-environment.sh dest=/etc/profile.d/phpstorm-environment.sh owner=root group=root mode=755 backup=no
+      - file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
+            
 - name: Create Source Folders
   hosts: all
   become: False
