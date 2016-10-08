@@ -16,8 +16,10 @@
     - apt: name=xfsprogs state=latest update_cache=true cache_valid_time=600
     - apt: name=sshpass state=latest update_cache=true cache_valid_time=600
     - apt: name=curl state=latest
+    - apt: name=apt-transport-https state=latest
     - apt: name=mysql-client state=latest
     - apt: name=mysql-workbench state=latest
+    - apt: name=apache2-utils state=latest update_cache=true cache_valid_time=600
     - apt: name=apache2-utils state=latest update_cache=true cache_valid_time=600
     - apt: name=httping state=latest update_cache=true cache_valid_time=600
     - apt_key: url=https://atlassian.artifactoryonline.com/atlassian/api/gpg/key/public state=present
