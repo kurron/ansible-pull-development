@@ -224,7 +224,7 @@
       - file: src=/home/vagrant/Software/logFacesClient path=/home/vagrant/Software/logfaces state=link
       - file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
       - copy: src=files/logFACES.desktop dest=/home/vagrant/Desktop/logFACES.desktop owner=vagrant group=vagrant backup=no mode=755
-      - file: src=/usr/lib/jvm/oracle-jdk-8/jre path=/home/vagrant/Software/logfaces state=link
+      - file: src=/usr/lib/jvm/oracle-jdk-8/jre path=/home/vagrant/Software/logfaces/jre state=link
       - file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
       
 - name: Create Source Folders
