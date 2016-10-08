@@ -240,6 +240,21 @@
       - file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
       - copy: src=files/Charles.desktop dest=/home/vagrant/Desktop/Charles.desktop owner=vagrant group=vagrant backup=no mode=755
       - file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
+
+- name: JMeter
+  hosts: all
+  become: False
+  vars:
+    version: 3.0
+  tasks:
+      - file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
+      - file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
+      - get_url: url=http://mirror.metrocast.net/apache//jmeter/binaries/apache-jmeter-{{ version }}.tgz dest=/home/vagrant/Downloads/jmeter-{{ version }}.tar.gz mode=444
+      - unarchive: src=/home/vagrant/Downloads/jmeter-{{ version }}.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/ apache-jmeter-{{ version }}/bin/jmeter.sh
+      - file: src=/home/vagrant/Software/jmeter-{{ version }} path=/home/vagrant/Software/jmeter state=link
+      - file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
+      - copy: src=files/JMeter.desktop dest=/home/vagrant/Desktop/JMeter.desktop owner=vagrant group=vagrant backup=no mode=755
+      - file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
       
 - name: Create Source Folders
   hosts: all
@@ -291,8 +306,8 @@
 #     - git: repo=https://github.com/kurron/docker-emacs.git dest=/home/vagrant/GitHub/docker-emacs
 #     - copy: src=files/Emacs-Docker.desktop dest=/home/vagrant/Desktop/Emacs-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
-      - git: repo=https://github.com/kurron/docker-jmeter.git dest=/home/vagrant/GitHub/docker-jmeter
-      - copy: src=files/JMeter-Docker.desktop dest=/home/vagrant/Desktop/JMeter-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+#     - git: repo=https://github.com/kurron/docker-jmeter.git dest=/home/vagrant/GitHub/docker-jmeter
+#     - copy: src=files/JMeter-Docker.desktop dest=/home/vagrant/Desktop/JMeter-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
 #     - git: repo=https://github.com/kurron/docker-android-studio.git dest=/home/vagrant/GitHub/docker-android-studio
 #     - copy: src=files/Studio-Docker.desktop dest=/home/vagrant/Desktop/Studio-Docker.desktop owner=vagrant group=vagrant backup=no mode=755

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=JMeter
+Comment=Loag Generation Tool
+Exec=/home/vagrant/Software/jmeter/bin/jmeter
+Icon=/home/vagrant/Software/jmeter/docs/images/jmeter.png
+Path=
+Terminal=false
+StartupNotify=true
+
