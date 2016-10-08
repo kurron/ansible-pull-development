@@ -68,7 +68,7 @@
   hosts: Ubuntu
   become: True
   vars:
-    node_version: v4.5.0
+    node_version: v4.6.0
   tasks:
       - get_url: url=http://nodejs.org/dist/{{ node_version }}/node-{{ node_version }}-linux-x64.tar.gz dest=/root/node-{{ node_version }}.tar.gz mode=444
       - unarchive: src=/root/node-{{ node_version }}.tar.gz dest=/opt copy=no owner=root group=root creates=/opt/node-{{ node_version }}-linux-x64/LICENSE
@@ -167,7 +167,7 @@
   tasks:
       - file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
       - file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
-      - get_url: url=https://download.jetbrains.com/ruby/RubyMine-{{ version }}.tar.gz dest=/home/vagrant/Downloads/rubymine-{{ version }}.tar.gz mode=444
+      - get_url: url=https://download.jetbrains.com/ruby/RubyMine-{{ version }}.tar.gz dest=/home/vagrant/Downloads/RubyMine-{{ version }}.tar.gz mode=444
       - unarchive: src=/home/vagrant/Downloads/RubyMine-{{ version }}.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/RubyMine-{{ version }}/build.txt
       - file: src=/home/vagrant/Software/RubyMine-{{ version }} path=/home/vagrant/Software/rubymine state=link
       - file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
