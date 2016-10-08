@@ -184,7 +184,7 @@
   tasks:
       - file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
       - file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
-      - get_url: url=https://download.jetbrains.com/cpp/CLion-{{ version }}.tar.gz dest=/home/vagrant/Downloads/clion-{{ version }}.tar.gz mode=444
+      - get_url: url=https://download.jetbrains.com/cpp/CLion-{{ version }}.tar.gz dest=/home/vagrant/Downloads/CLion-{{ version }}.tar.gz mode=444
       - unarchive: src=/home/vagrant/Downloads/CLion-{{ version }}.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/CLion-{{ version }}/build.txt
       - file: src=/home/vagrant/Software/CLion-{{ version }} path=/home/vagrant/Software/clion state=link
       - file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
