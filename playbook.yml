@@ -251,7 +251,7 @@
       - file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
       - get_url: url=http://mirror.metrocast.net/apache/jmeter/binaries/apache-jmeter-{{ version }}.tgz dest=/home/vagrant/Downloads/jmeter-{{ version }}.tar.gz mode=444
       - unarchive: src=/home/vagrant/Downloads/jmeter-{{ version }}.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/apache-jmeter-{{ version }}/bin/jmeter.sh
-      - file: src=/home/vagrant/Software/jmeter-{{ version }} path=/home/vagrant/Software/jmeter state=link
+      - file: src=/home/vagrant/Software/apache-jmeter-{{ version }} path=/home/vagrant/Software/jmeter state=link
       - file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
       - copy: src=files/JMeter.desktop dest=/home/vagrant/Desktop/JMeter.desktop owner=vagrant group=vagrant backup=no mode=755
       - file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
