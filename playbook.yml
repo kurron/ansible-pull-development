@@ -210,7 +210,22 @@
       - lineinfile: dest=/etc/environment line='PHPSTORM_JDK=/usr/lib/jvm/oracle-jdk-8'
       - copy: src=scripts/phpstorm-environment.sh dest=/etc/profile.d/phpstorm-environment.sh owner=root group=root mode=755 backup=no
       - file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
-            
+
+- name: logFACES Client
+  hosts: all
+  become: False
+  vars:
+    version: 4.3.0
+  tasks:
+      - file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
+      - file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
+      - get_url: url=http://www.moonlit-software.com/logfaces/downloads/lfc.{{ version }}.linux.gtk.x86_64.tar.gz dest=/home/vagrant/Downloads/logfaces-{{ version }}.tar.gz mode=444
+      - unarchive: src=/home/vagrant/Downloads/logfaces-{{ version }}.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/logFacesClient/about.html
+      - file: src=/home/vagrant/Software/logFacesClient path=/home/vagrant/Software/logfaces state=link
+      - file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
+      - copy: src=files/logFACES.desktop dest=/home/vagrant/Desktop/logFACES.desktop owner=vagrant group=vagrant backup=no mode=755
+      - file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
+      
 - name: Create Source Folders
   hosts: all
   become: False
@@ -255,8 +270,8 @@
 #     - git: repo=https://github.com/kurron/docker-dbvisualizer.git dest=/home/vagrant/GitHub/docker-dbvisualizer
 #     - copy: src=files/Database-Docker.desktop dest=/home/vagrant/Desktop/Database-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
-      - git: repo=https://github.com/kurron/docker-logfaces-client.git dest=/home/vagrant/GitHub/docker-logfaces-client
-      - copy: src=files/logFACES-Docker.desktop dest=/home/vagrant/Desktop/logFACES-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+#     - git: repo=https://github.com/kurron/docker-logfaces-client.git dest=/home/vagrant/GitHub/docker-logfaces-client
+#     - copy: src=files/logFACES-Docker.desktop dest=/home/vagrant/Desktop/logFACES-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
 #     - git: repo=https://github.com/kurron/docker-emacs.git dest=/home/vagrant/GitHub/docker-emacs
 #     - copy: src=files/Emacs-Docker.desktop dest=/home/vagrant/Desktop/Emacs-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
