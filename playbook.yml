@@ -226,6 +226,20 @@
       - copy: src=files/logFACES.desktop dest=/home/vagrant/Desktop/logFACES.desktop owner=vagrant group=vagrant backup=no mode=755
       - file: src=/usr/lib/jvm/oracle-jdk-8/jre path=/home/vagrant/Software/logfaces/jre state=link
       - file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
+
+- name: Charles Proxy
+  hosts: all
+  become: False
+  vars:
+    version: 4.0.1
+  tasks:
+      - file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
+      - file: path=/home/vagrant/Downloads owner=vagrant group=vagrant state=directory mode=755
+      - get_url: url=https://www.charlesproxy.com/assets/release/{{ version }}/charles-proxy-{{ version }}.tar.gz dest=/home/vagrant/Downloads/charles-{{ version }}.tar.gz mode=444
+      - unarchive: src=/home/vagrant/Downloads/charles-{{ version }}.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/charles/doc/EULA.rtf
+      - file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
+      - copy: src=files/Charles.desktop dest=/home/vagrant/Desktop/Charles.desktop owner=vagrant group=vagrant backup=no mode=755
+      - file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
       
 - name: Create Source Folders
   hosts: all
@@ -265,8 +279,8 @@
 #     - git: repo=https://github.com/kurron/docker-0xdbe.git dest=/home/vagrant/GitHub/docker-0xdbe
 #     - copy: src=files/0xDBE-Docker.desktop dest=/home/vagrant/Desktop/0xDBE-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
-      - git: repo=https://github.com/kurron/docker-charles-proxy.git dest=/home/vagrant/GitHub/docker-charles-proxy
-      - copy: src=files/Charles-Docker.desktop dest=/home/vagrant/Desktop/Charles-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
+#     - git: repo=https://github.com/kurron/docker-charles-proxy.git dest=/home/vagrant/GitHub/docker-charles-proxy
+#     - copy: src=files/Charles-Docker.desktop dest=/home/vagrant/Desktop/Charles-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
 
 #     - git: repo=https://github.com/kurron/docker-dbvisualizer.git dest=/home/vagrant/GitHub/docker-dbvisualizer
 #     - copy: src=files/Database-Docker.desktop dest=/home/vagrant/Desktop/Database-Docker.desktop owner=vagrant group=vagrant backup=no mode=755
