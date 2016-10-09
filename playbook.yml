@@ -143,7 +143,7 @@
       - file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
 - name: Jetbrains DataGrip IDE
-  hosts: all
+  hosts: nobody
   become: False
   vars:
     version: 2016.2.3
@@ -160,7 +160,7 @@
       - file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
 - name: Jetbrains RubyMine IDE
-  hosts: all
+  hosts: nobody
   become: False
   vars:
     version: 2016.2.4
@@ -177,7 +177,7 @@
       - file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
 - name: Jetbrains CLion IDE
-  hosts: all
+  hosts: nobody
   become: False
   vars:
     version: 2016.2.2
@@ -194,7 +194,7 @@
       - file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
 - name: Jetbrains PhpStorm
-  hosts: all
+  hosts: nobody
   become: False
   vars:
     version: 2016.2.1
@@ -242,7 +242,7 @@
       - file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
 - name: JMeter
-  hosts: all
+  hosts: nobody
   become: False
   vars:
     version: 3.0
@@ -333,7 +333,7 @@
 #     - file: src=/home/vagrant/GitHub/docker-scala/scala-repl.sh path=/home/vagrant/bin/scala-repl state=link
 #     - file: src=/home/vagrant/GitHub/docker-scala/scala.sh path=/home/vagrant/bin/scala state=link
 
-      - lineinfile: dest=/home/vagrant/.bashrc line='/usr/bin/xhost +'
+#     - lineinfile: dest=/home/vagrant/.bashrc line='/usr/bin/xhost +'
 
 #     - copy: src=scripts/prime-images.sh dest=/home/vagrant/bin/prime-images.sh owner=vagrant group=vagrant backup=no mode=755
 
