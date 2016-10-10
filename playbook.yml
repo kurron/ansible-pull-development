@@ -20,7 +20,6 @@
     - apt: name=mysql-client state=latest
     - apt: name=mysql-workbench state=latest
     - apt: name=apache2-utils state=latest update_cache=true cache_valid_time=600
-    - apt: name=apache2-utils state=latest update_cache=true cache_valid_time=600
     - apt: name=httping state=latest update_cache=true cache_valid_time=600
     - apt_key: url=https://atlassian.artifactoryonline.com/atlassian/api/gpg/key/public state=present
 #   - apt_repository: repo='deb https://atlassian.artifactoryonline.com/atlassian/hipchat-apt-client $(lsb_release -c -s) main' state=present mode=0644
@@ -37,6 +36,9 @@
     - yum: name=xfsprogs state=latest
     - yum: name=sshpass state=latest
     - yum: name=curl state=latest
+    - yum: name="@MySQL Database client" state=latest
+    - yum: name=httping state=latest
+
 
 - name: Install JDK
   hosts: all
